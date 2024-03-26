@@ -17,13 +17,13 @@ public class Negocio {
 	public void IniciarMatriz() {
 		
 		//Al iniciar la matriz se deben completar 2 celdas random con 2 o 4.
-		int fila = ObtenerFilaRandom();
-		int columna = ObtenerColumnaRandom();
+		int fila = ObtenerFilaRandomDisponible();
+		int columna = ObtenerColumnaRandomDisponible();
 		
 		matriz[fila][columna] = ObtenerValorRandom();
 
-		fila = ObtenerFilaRandom();
-		columna = ObtenerColumnaRandom();
+		fila = ObtenerFilaRandomDisponible();
+		columna = ObtenerColumnaRandomDisponible();
 		
 		matriz[fila][columna] = ObtenerValorRandom();
 	}
@@ -55,13 +55,13 @@ public class Negocio {
 		return valor;
 	}
 	
-	private int ObtenerFilaRandom() {
+	private int ObtenerFilaRandomDisponible() {
 		//Debe devolver una posición para asignar el número random. La posición debe ser una disponible luego del reordenamiento.
 		int valor = 1;
 		return valor;
 	}
 	
-	private int ObtenerColumnaRandom() {
+	private int ObtenerColumnaRandomDisponible() {
 		//Debe devolver una posición para asignar el número random. La posición debe ser una disponible luego del reordenamiento.
 		int valor = 1;
 		return valor;
