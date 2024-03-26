@@ -1,4 +1,5 @@
 package game_2048;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Negocio {
@@ -18,12 +19,12 @@ public class Negocio {
 		
 		//Al iniciar la matriz se deben completar 2 celdas random con 2 o 4.
 		int fila = ObtenerFilaRandomDisponible();
-		int columna = ObtenerColumnaRandomDisponible();
+		int columna = ObtenerColumnaRandomDisponible(fila);
 		
 		matriz[fila][columna] = ObtenerValorRandom();
 
 		fila = ObtenerFilaRandomDisponible();
-		columna = ObtenerColumnaRandomDisponible();
+		columna = ObtenerColumnaRandomDisponible(fila);
 		
 		matriz[fila][columna] = ObtenerValorRandom();
 	}
@@ -48,22 +49,28 @@ public class Negocio {
 	//Métodos privados llamados internamente
 	private int ObtenerValorRandom() {
 		
-        Random random = new Random();
-        int randomNumber = random.nextInt(2); // Puede ser 0 o 1
-        int valor = (randomNumber == 0) ? 2 :4; 
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(2);
+		list.add(4); 
     
-		return valor;
+		return getRandom(list);
 	}
 	
-	private int ObtenerFilaRandomDisponible() {
+	private static int ObtenerFilaRandomDisponible() {
 		//Debe devolver una posición para asignar el número random. La posición debe ser una disponible luego del reordenamiento.
 		int valor = 1;
 		return valor;
 	}
 	
-	private int ObtenerColumnaRandomDisponible() {
+	private static int ObtenerColumnaRandomDisponible(int fila) {
 		//Debe devolver una posición para asignar el número random. La posición debe ser una disponible luego del reordenamiento.
 		int valor = 1;
 		return valor;
 	}
+	
+	private static int getRandom(ArrayList<Integer> list) {
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(list.size());
+        return list.get(randomIndex);
+    }
 }
