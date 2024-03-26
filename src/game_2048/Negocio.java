@@ -1,4 +1,5 @@
 package game_2048;
+import java.util.Random;
 
 public class Negocio {
 	
@@ -14,21 +15,28 @@ public class Negocio {
 	
 	//Métodos públicos llamados por la interfaz de presentación
 	public void IniciarMatriz() {
+		
+		//Al iniciar la matriz se deben completar 2 celdas random con 2 o 4.
 		int fila = ObtenerFilaRandom();
 		int columna = ObtenerColumnaRandom();
+		
+		matriz[fila][columna] = ObtenerValorRandom();
+
+		fila = ObtenerFilaRandom();
+		columna = ObtenerColumnaRandom();
 		
 		matriz[fila][columna] = ObtenerValorRandom();
 	}
 	
 	public void ReordenarMatriz (accion AccionUsuario) {
 		switch(AccionUsuario) {
-			case accion.Arriba:
+			case Arriba:
 				break;
-			case accion.Abajo:
+			case Abajo:
 				break;
-			case accion.Izquierda:
+			case Izquierda:
 				break;
-			case accion.Derecha:
+			case Derecha:
 				break;
 		}
 	}
@@ -39,7 +47,11 @@ public class Negocio {
 
 	//Métodos privados llamados internamente
 	private int ObtenerValorRandom() {
-		int valor = 2; //Debe ser 2 o 4.
+		
+        Random random = new Random();
+        int randomNumber = random.nextInt(2); // Puede ser 0 o 1
+        int valor = (randomNumber == 0) ? 2 :4; 
+    
 		return valor;
 	}
 	
