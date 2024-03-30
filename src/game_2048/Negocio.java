@@ -18,13 +18,15 @@ public class Negocio {
 	public void IniciarMatriz() {
 		
 		//Al iniciar la matriz se deben completar 2 celdas random con 2 o 4.
-		int fila = ObtenerFilaRandomDisponible();
-		int columna = ObtenerColumnaRandomDisponible(fila);
+		Posicion posicionRandom = obtenerPosicionRandomDisponible();
+		int fila = posicionRandom.getFila();
+		int columna = posicionRandom.getColumna();
 		
 		matriz[fila][columna] = ObtenerValorRandom();
-
-		fila = ObtenerFilaRandomDisponible();
-		columna = ObtenerColumnaRandomDisponible(fila);
+		
+		posicionRandom = obtenerPosicionRandomDisponible();
+		fila = posicionRandom.getFila();
+		columna = posicionRandom.getColumna();
 		
 		matriz[fila][columna] = ObtenerValorRandom();
 	}
@@ -56,21 +58,30 @@ public class Negocio {
 		return getRandom(list);
 	}
 	
-	private static int ObtenerFilaRandomDisponible() {
-		//Debe devolver una posición para asignar el número random. La posición debe ser una disponible luego del reordenamiento.
-		int valor = 1;
-		return valor;
-	}
-	
-	private static int ObtenerColumnaRandomDisponible(int fila) {
-		//Debe devolver una posición para asignar el número random. La posición debe ser una disponible luego del reordenamiento.
-		int valor = 1;
-		return valor;
-	}
-	
 	private static int getRandom(ArrayList<Integer> list) {
         Random generator = new Random();
         int randomIndex = generator.nextInt(list.size());
         return list.get(randomIndex);
     }
+	
+	public Posicion obtenerPosicionRandomDisponible() {
+		int[][] matriz = ObtenerMatriz();
+		ArrayList<Posicion> posicionesDisponibles = new ArrayList<Posicion>();
+		
+		for( int col = 0; col < matriz.length; col++ ) {
+			for( int fila = 0; fila < matriz.length; fila++ ) {
+				if(matriz[col][fila] == 0) {
+					posicionesDisponibles.add(new Posicion(fila, col));
+				}
+			}
+		}
+		
+		return getPosicionRandom(posicionesDisponibles);
+	};
+	
+	private Posicion getPosicionRandom(ArrayList<Posicion> list) {
+		Random generator = new Random();
+        int randomIndex = generator.nextInt(list.size());
+        return list.get(randomIndex);
+	}
 }
