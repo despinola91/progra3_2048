@@ -43,5 +43,37 @@ public class Movimiento {
 		}
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private int vacias() {
+	int n=0;
+	for(int f=0;f<FIL;f++) {
+		for(int c=0;c<COL;c++) {
+			if(tablero[f][c]==0) {
+				n++;
+			}
+		}
+	}
+	return n;
+}
+
+private int vaciasEnFila(int f) {
+	int n=0;
+	for(int c=0;c<COL;c++) {
+		if(tablero[f][c]==0) {
+			n++;
+		}
+	}
+	return n;
+}
+
+private int vaciasEnColumna(int c) {
+	int n=0;
+	for(int f=0;f<FIL;f++) {
+		if(tablero[f][c]==0) {
+			n++;
+		}
+	}
+	return n;
+}
+
 
 }
