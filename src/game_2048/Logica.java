@@ -1,4 +1,4 @@
-package tp2048;
+package game_2048;
 
 import java.util.Random;
 
