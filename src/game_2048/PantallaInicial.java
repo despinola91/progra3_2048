@@ -52,7 +52,7 @@ public class PantallaInicial {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("2048"); //Titulo de la ventana
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaInicial.class.getResource("/tp2048/2048icon.png"))); //Icono
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaInicial.class.getResource("/game_2048/2048icon.png"))); //Icono
 		frame.getContentPane().setBackground(new Color(210, 180, 140));
 		frame.setBounds(300, 20, 450, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

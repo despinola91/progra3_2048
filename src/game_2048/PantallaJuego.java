@@ -46,7 +46,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 	private void initialize() {
 		//Configuraciones de la ventana
-		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaJuego.class.getResource("/tp2048/2048icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaJuego.class.getResource("/game_2048/2048icon.png")));
 		
 		//coloco la imagen de fondo
 		// Agregar la imagen de fondo al panelTablero
