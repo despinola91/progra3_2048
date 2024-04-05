@@ -99,8 +99,8 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		getContentPane().add(lblPuntaje);
 		
 		JLabel lblFondo = new JLabel("New label");
-		lblFondo.setIcon(new ImageIcon("C:\\Users\\Josy\\Desktop\\Proye\\TPjuego_2048\\figura2.jpg"));
-		lblFondo.setBounds(20, 40, 380, 425);
+		lblFondo.setIcon(new ImageIcon("C:\\Users\\Josy\\Documents\\GitHub\\progra3_2048\\figura3.png"));
+		lblFondo.setBounds(0, 0, 436, 493);
 		getContentPane().add(lblFondo);
 
 
