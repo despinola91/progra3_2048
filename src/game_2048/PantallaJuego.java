@@ -46,14 +46,10 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 	private void initialize() {
 		//Configuraciones de la ventana
-		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaJuego.class.getResource("/game_2048/2048icon.png")));
+
+		//se elimina el ícono porque trae problemas al momento de push y pull (no se transfiere la imagen)
+		//setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaJuego.class.getResource("/game_2048/2048icon.png")));
 		
-		//coloco la imagen de fondo
-		// Agregar la imagen de fondo al panelTablero
-    //    JLabel lblFondo = new JLabel();
-    //    lblFondo.setIcon(new ImageIcon("figura2.jpg")); // Cambia "figura2.jpg" por la ruta de tu imagen
-    //    lblFondo.setBounds(0, 0, 414, 337); // Ajusta los límites según el tamaño de tu imagen
-    //    getContentPane().add(lblFondo, BorderLayout.CENTER); // La imagen de fondo estará en el centro
 			
 		setTitle("2048");
 		setBounds(300, 20, 450, 530);
@@ -69,8 +65,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		panelTablero.setBounds(10, 70, 414, 337);
 		getContentPane().add(panelTablero);
 		panelTablero.setLayout(new GridLayout(4,4));
-		//panelTablero.setOpaque(false);
-		//getContentPane().add(panelTablero, BorderLayout.CENTER);
+	
 		
 		//Crea y posiciona los botones del tablero 4x4
 		botones = new JButton[4][4];
@@ -89,7 +84,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		lbl2048.setFont(new Font("Segoe UI Black", Font.PLAIN, 40));
 		lbl2048.setBounds(10, 11, 110, 48);
 		getContentPane().add(lbl2048);
-		//getContentPane().add(lbl2048, BorderLayout.NORTH);
+	
 
 		// Puntaje
 		JLabel lblPuntaje = new JLabel("Puntaje: ");
@@ -99,7 +94,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		getContentPane().add(lblPuntaje);
 		
 		JLabel lblFondo = new JLabel("New label");
-		lblFondo.setIcon(new ImageIcon("C:\\Users\\Josy\\Documents\\GitHub\\progra3_2048\\figura3.png"));
+		lblFondo.setIcon(new ImageIcon("figura3.png"));
 		lblFondo.setBounds(0, 0, 436, 493);
 		getContentPane().add(lblFondo);
 
@@ -116,7 +111,6 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		
 		
 
-	
 	//Nexo entre logica e interfaz
 	private void actualizarTablero() { //Actualizo el tablero con metodo que busca los valores que hay en cada celda. Me los traigo de la logica
 		for (int fila = 0; fila < 4; fila++) {
@@ -159,7 +153,6 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	}
 	
 	
-	//fin prueba fondo
 	
 	
 	//para cambiar el texto cuando la suma da mas de 8
