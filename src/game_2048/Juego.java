@@ -2,7 +2,7 @@ package game_2048;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Negocio {
+public class Juego {
 	
 	//Propiedades
 	private int [][] matriz = new int[4][4];

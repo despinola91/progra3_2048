@@ -1,9 +1,9 @@
 package game_2048;
 
-public class TestDriveNegocio {
+public class JuegoTest {
 
   public static void main (String[] args) {
-      Negocio negocio = new Negocio();
+      Juego negocio = new Juego();
 
       negocio.IniciarMatriz();
       int [][] matriz = negocio.ObtenerMatriz();
