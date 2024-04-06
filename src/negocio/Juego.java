@@ -5,67 +5,43 @@ import java.util.Random;
 public class Juego {
 	
 	//Propiedades
-	private int [][] matriz = new int[4][4];
+	public static int [][] matriz = new int[4][4];
 	
-	private enum accion {
-		Arriba,
-		Abajo,
-		Izquierda,
-		Derecha
-	}
+	//Métodos disponibles para la interfaz
 	
-	//Métodos públicos llamados por la interfaz de presentación
-	public void IniciarMatriz() {
+	/**
+	 * Inicializa la matriz completando 2 posiciones random con 2 o 4.
+	 */
+	public static void iniciarMatriz() {
 		
 		//Al iniciar la matriz se deben completar 2 celdas random con 2 o 4.
 		Posicion posicionRandom = obtenerPosicionRandomDisponible();
-		int fila = posicionRandom.getFila();
-		int columna = posicionRandom.getColumna();
+		int fila = posicionRandom.obtenerFila();
+		int columna = posicionRandom.obtenerColumna();
 		
-		matriz[fila][columna] = ObtenerValorRandom();
+		matriz[fila][columna] = obtenerValorRandom();
 		
 		posicionRandom = obtenerPosicionRandomDisponible();
-		fila = posicionRandom.getFila();
-		columna = posicionRandom.getColumna();
+		fila = posicionRandom.obtenerFila();
+		columna = posicionRandom.obtenerColumna();
 		
-		matriz[fila][columna] = ObtenerValorRandom();
+		matriz[fila][columna] = obtenerValorRandom();
 	}
 	
-	public void ReordenarMatriz (accion AccionUsuario) {
-		switch(AccionUsuario) {
-			case Arriba:
-				break;
-			case Abajo:
-				break;
-			case Izquierda:
-				break;
-			case Derecha:
-				break;
-		}
-	}
-	
-	public int[][] ObtenerMatriz() {
+	/**
+	 * Devuelve la matriz en con sus valores actuales.
+	 * @return matriz de enteros.
+	 */
+	public static int[][] obtenerMatriz() {
 		return matriz;
 	}
 
-	//Métodos privados llamados internamente
-	private int ObtenerValorRandom() {
-		
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		list.add(2);
-		list.add(4); 
-    
-		return getRandom(list);
-	}
-	
-	private static int getRandom(ArrayList<Integer> list) {
-        Random generator = new Random();
-        int randomIndex = generator.nextInt(list.size());
-        return list.get(randomIndex);
-    }
-	
-	public Posicion obtenerPosicionRandomDisponible() {
-		int[][] matriz = ObtenerMatriz();
+	/**
+	 * Devuelve una posicion (fila y columna) random disponible dentro de la matriz.
+	 * @return objeto posicion compuesto de fila y columna.
+	 */
+	public static Posicion obtenerPosicionRandomDisponible() {
+		int[][] matriz = obtenerMatriz();
 		ArrayList<Posicion> posicionesDisponibles = new ArrayList<Posicion>();
 		
 		for( int col = 0; col < matriz.length; col++ ) {
@@ -76,10 +52,69 @@ public class Juego {
 			}
 		}
 		
-		return getPosicionRandom(posicionesDisponibles);
+		return obtenerPosicionRandom(posicionesDisponibles);
 	};
+
+	/**
+	 * Devuelve un valor entero random ya sea 2 o 4.
+	 * @return entero variando entre 2 y 4.
+	 */
+	public static int obtenerValorRandom() {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(2);
+		list.add(4); 
+    
+		return obtenerRandom(list);
+	}
 	
-	private Posicion getPosicionRandom(ArrayList<Posicion> list) {
+	/**
+	 * Mueve todos los elementos de la matriz hacia arriba, sumando los que son iguales.
+	 */
+	public static void moverArriba() {
+
+	}
+
+	/**
+	 * Mueve todos los elementos de la matriz hacia abajo, sumando los que son iguales.
+	 */
+	public static void moverAbajo() {
+		
+	}
+
+	/**
+	 * Mueve todos los elementos de la matriz hacia la izquierda, sumando los que son iguales.
+	 */
+	public static void moverIzquierda() {
+		
+	}
+
+	/**
+	 * Mueve todos los elementos de la matriz hacia la derecha, sumando los que son iguales.
+	 */
+	public static void moverDerecha() {
+		
+	}
+
+	
+	//Métodos internos
+	
+	/**
+	 * Obtiene un valor entero random a partir de una lista dada.
+	 * @param list lista de enteros.
+	 * @return entero dentro de la lista.
+	 */
+	private static int obtenerRandom(ArrayList<Integer> list) {
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(list.size());
+        return list.get(randomIndex);
+    }
+		
+	/**
+	 * Obtiene una posicion random a partir de una lista dada.
+	 * @param list lista de posiciones disponibles en la matriz.
+	 * @return posicion dentro de la lista.
+	 */
+	private static Posicion obtenerPosicionRandom(ArrayList<Posicion> list) {
 		Random generator = new Random();
         int randomIndex = generator.nextInt(list.size());
         return list.get(randomIndex);
