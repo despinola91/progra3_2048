@@ -9,11 +9,11 @@ public class Posicion {
         this.columna = columna;
     }
 
-    public int getFila() {
+    public int obtenerFila() {
         return fila;
     }
 
-    public int getColumna() {
+    public int obtenerColumna() {
         return columna;
     }
 }
