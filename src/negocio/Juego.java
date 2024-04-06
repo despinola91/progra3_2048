@@ -1,4 +1,4 @@
-package game_2048;
+package negocio;
 import java.util.ArrayList;
 import java.util.Random;
 
