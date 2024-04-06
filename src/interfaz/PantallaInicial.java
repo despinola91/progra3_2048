@@ -1,5 +1,5 @@
 
-package game_2048;
+package interfaz;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;

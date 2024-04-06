@@ -1,4 +1,4 @@
-package game_2048;
+package negocio;
 
 public class Posicion {
 	private int fila;

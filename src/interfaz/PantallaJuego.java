@@ -1,4 +1,4 @@
-package game_2048;
+package interfaz;
 //prueba de cambios git
 import java.awt.BorderLayout;
 import java.awt.Color;
