@@ -1,5 +1,6 @@
 package interfaz;
 //prueba de cambios git
+import negocio.Juego;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -22,8 +23,7 @@ import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
 
 public class PantallaJuego extends JFrame implements KeyListener{
-
-	private Logica logica;
+	
 	private JButton[][] botones;
 	private JPanel panelTablero;
 
@@ -45,16 +45,18 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	}
 
 	private void initialize() {
+
 		//Configuraciones de la ventana
 
 		//se elimina el ícono porque trae problemas al momento de push y pull (no se transfiere la imagen)
 		//setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaJuego.class.getResource("/game_2048/2048icon.png")));
 		
+		//Se inicia la Matriz de la clase estatica de juego
+		Juego.iniciarMatriz();
 			
 		setTitle("2048");
 		setBounds(300, 20, 450, 530);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.logica = new Logica(this);
 		getContentPane().setBackground(new Color(224, 255, 255));
 
 		getContentPane().setLayout(null);
@@ -113,9 +115,10 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 	//Nexo entre logica e interfaz
 	private void actualizarTablero() { //Actualizo el tablero con metodo que busca los valores que hay en cada celda. Me los traigo de la logica
+		int[][] matriz = Juego.obtenerMatriz();
 		for (int fila = 0; fila < 4; fila++) {
 			for (int columna = 0; columna < 4; columna++) {
-				int valor = logica.obtenerValorCelda(fila, columna);
+				int valor = matriz[fila][columna];
 				botones[fila][columna].setText(valor == 0 ? "" : String.valueOf(valor)); //muestra el nro unicamente si es distinto de 0
 								
 				 // Cambiar el color según el valor usando el metodo cambiaColorCelda
@@ -178,16 +181,16 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		int keyCode = e.getKeyCode();
 		switch (keyCode) {
 		case KeyEvent.VK_UP:
-			logica.moverArriba();
+			Juego.moverArriba();
 			break;
 		case KeyEvent.VK_DOWN:
-			logica.moverAbajo();
+			Juego.moverAbajo();
 			break;
 		case KeyEvent.VK_LEFT:
-			logica.moverIzquierda();
+			Juego.moverIzquierda();
 			break;
 		case KeyEvent.VK_RIGHT:
-			logica.moverDerecha();
+			Juego.moverDerecha();
 			break;
 		}
 		actualizarTablero();
