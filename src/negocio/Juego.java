@@ -46,7 +46,7 @@ public class Juego {
 		
 		for( int col = 0; col < matriz.length; col++ ) {
 			for( int fila = 0; fila < matriz.length; fila++ ) {
-				if(matriz[col][fila] == 0) {
+				if(matriz[fila][col] == 0) {
 					posicionesDisponibles.add(new Posicion(fila, col));
 				}
 			}

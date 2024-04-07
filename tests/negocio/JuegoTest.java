@@ -22,5 +22,28 @@ class JuegoTest {
         {0, 1, 1, 1},
         {1, 1, 1, 1}
 		};
+		
+	Posicion posicion = Juego.obtenerPosicionRandomDisponible();	
+	assertTrue(posicion.obtenerFila() == 2 && posicion.obtenerColumna() == 0);
+	
+	Juego.matriz = new int[][]{
+		{1, 1, 1, 0},
+        {1, 1, 1, 1},
+        {1, 1, 1, 1},
+        {1, 1, 1, 1}
+		};
+		
+	posicion = Juego.obtenerPosicionRandomDisponible();	
+	assertTrue(posicion.obtenerFila() == 0 && posicion.obtenerColumna() == 3);
+	
+	Juego.matriz = new int[][]{
+		{1, 1, 1, 1},
+        {1, 1, 1, 1},
+        {1, 1, 1, 1},
+        {1, 1, 0, 1}
+		};
+		
+	posicion = Juego.obtenerPosicionRandomDisponible();	
+	assertTrue(posicion.obtenerFila() == 3 && posicion.obtenerColumna() == 2);
 	}
 }
