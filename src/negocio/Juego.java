@@ -71,9 +71,35 @@ public class Juego {
 	 * Mueve todos los elementos de la matriz hacia arriba, sumando los que son iguales.
 	 */
 	public static void moverArriba() {
-
+		// Iteramos sobre cada columna de la matriz
+		for (int j = 0; j < matriz.length; j++) {
+			// Iteramos sobre cada fila, comenzando desde la segunda
+			for (int i = 1; i < matriz.length; i++) {
+				// Si la celda actual no está vacía
+				if (matriz[i][j] != 0) {
+					// Buscamos una celda vacía por encima
+					int k = i - 1;
+					while (k >= 0 && matriz[k][j] == 0) {
+						k--;
+					}
+					// Si encontramos una celda vacía, movemos el número actual hacia arriba
+					if (k >= 0) {
+						if (matriz[k][j] == matriz[i][j]) {
+							// Si la celda vacía contiene el mismo número, los sumamos
+							matriz[k][j] *= 2;
+							matriz[i][j] = 0;
+						} else {
+							// Si la celda vacía es diferente, simplemente movemos el número
+							matriz[k + 1][j] = matriz[i][j];
+							if (k + 1 != i) {
+								matriz[i][j] = 0;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
-
 	/**
 	 * Mueve todos los elementos de la matriz hacia abajo, sumando los que son iguales.
 	 */
