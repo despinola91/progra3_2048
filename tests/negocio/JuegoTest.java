@@ -11,7 +11,7 @@ class JuegoTest {
 
 	@Test
 	void ObtenerValorRandomTest() {
-		assertThat(Juego.ObtenerValorRandom(), anyOf(equalTo(2), equalTo(4)));
+		assertThat(Juego.obtenerValorRandom(), anyOf(equalTo(2), equalTo(4)));
 	}
 	
 	@Test
