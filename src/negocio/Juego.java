@@ -39,6 +39,14 @@ public class Juego {
 	public int[][] obtenerMatriz() {
 		return matriz;
 	}
+	
+	/**
+	 * Redefine todos los valores de la matriz en instancia por los recibidos en parametros. Solo para testing.
+	 * @return void
+	 */
+	public void definirMatriz(int[][] matrizParam) {
+		this.matriz = matrizParam;
+	}
 
 	/**
 	 * Devuelve una posicion (fila y columna) random disponible dentro de la matriz.
