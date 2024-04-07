@@ -71,28 +71,28 @@ public class Juego {
 	 * Mueve todos los elementos de la matriz hacia arriba, sumando los que son iguales.
 	 */
 	public static void moverArriba() {
-
+		Movimiento.moverArriba();
 	}
 
 	/**
 	 * Mueve todos los elementos de la matriz hacia abajo, sumando los que son iguales.
 	 */
 	public static void moverAbajo() {
-		
+		Movimiento.moverAbajo();
 	}
 
 	/**
 	 * Mueve todos los elementos de la matriz hacia la izquierda, sumando los que son iguales.
 	 */
 	public static void moverIzquierda() {
-		
+		Movimiento.moverIzquierda();	
 	}
 
 	/**
 	 * Mueve todos los elementos de la matriz hacia la derecha, sumando los que son iguales.
 	 */
 	public static void moverDerecha() {
-		
+		Movimiento.moverDerecha();
 	}
 
 	
