@@ -125,5 +125,4 @@ class JuegoTest {
     	assertTrue(estadoMatriz[2][1] == 2 && estadoMatriz[2][2] == 4 && estadoMatriz[2][3] == 8);
     	assertTrue(estadoMatriz[3][1] == 2 && estadoMatriz[3][2] == 4 && estadoMatriz[3][3] == 8);
     }
->>>>>>> main
 }
