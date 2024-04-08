@@ -7,7 +7,7 @@ public class Juego {
 	//Propiedades
 	private int [][] matriz = new int[4][4];
 	
-	Juego() {
+	public Juego() {
 		this.iniciarMatriz();
 	};
 	

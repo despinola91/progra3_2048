@@ -24,6 +24,7 @@ import javax.swing.border.MatteBorder;
 
 public class PantallaJuego extends JFrame implements KeyListener{
 	
+	private Juego juego = new Juego();
 	private JButton[][] botones;
 	private JPanel panelTablero;
 
@@ -52,7 +53,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		//setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaJuego.class.getResource("/game_2048/2048icon.png")));
 		
 		//Se inicia la Matriz de la clase estatica de juego
-		Juego.iniciarMatriz();
+		juego.iniciarMatriz();
 			
 		setTitle("2048");
 		setBounds(300, 20, 450, 530);
@@ -115,7 +116,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 	//Nexo entre logica e interfaz
 	private void actualizarTablero() { //Actualizo el tablero con metodo que busca los valores que hay en cada celda. Me los traigo de la logica
-		int[][] matriz = Juego.obtenerMatriz();
+		int[][] matriz = juego.obtenerMatriz();
 		for (int fila = 0; fila < 4; fila++) {
 			for (int columna = 0; columna < 4; columna++) {
 				int valor = matriz[fila][columna];
@@ -181,16 +182,16 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		int keyCode = e.getKeyCode();
 		switch (keyCode) {
 		case KeyEvent.VK_UP:
-			Juego.moverArriba();
+			juego.moverArriba();
 			break;
 		case KeyEvent.VK_DOWN:
-			Juego.moverAbajo();
+			juego.moverAbajo();
 			break;
 		case KeyEvent.VK_LEFT:
-			Juego.moverIzquierda();
+			juego.moverIzquierda();
 			break;
 		case KeyEvent.VK_RIGHT:
-			Juego.moverDerecha();
+			juego.moverDerecha();
 			break;
 		}
 		actualizarTablero();
