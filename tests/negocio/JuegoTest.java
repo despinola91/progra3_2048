@@ -53,4 +53,76 @@ class JuegoTest {
         posicion = juego.obtenerPosicionRandomDisponible(); 
         assertTrue(posicion.obtenerFila() == 3 && posicion.obtenerColumna() == 2);
     }
+    
+    @Test
+    void MoverArriba () {
+    	juego.definirMatriz( new int[][] {
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8}
+    	});
+    	
+    	juego.moverArriba();
+    	
+    	int[][] estadoMatriz = juego.obtenerMatriz();
+    	
+    	assertTrue(estadoMatriz[0][0] == 4 && estadoMatriz[0][1] == 8 && estadoMatriz[0][3] == 16);
+    	assertTrue(estadoMatriz[1][0] == 4 && estadoMatriz[1][1] == 8 && estadoMatriz[1][3] == 16);
+    }
+    
+    @Test
+    void MoverAbajo () {
+    	juego.definirMatriz( new int[][] {
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8}
+    	});
+    	
+    	juego.moverAbajo();
+    	
+    	int[][] estadoMatriz = juego.obtenerMatriz();
+    	
+    	assertTrue(estadoMatriz[2][0] == 4 && estadoMatriz[2][1] == 8 && estadoMatriz[2][3] == 16);
+    	assertTrue(estadoMatriz[3][0] == 4 && estadoMatriz[3][1] == 8 && estadoMatriz[3][3] == 16);
+    }
+    
+    @Test
+    void MoverIzquierda () {
+    	juego.definirMatriz( new int[][] {
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8}
+    	});
+    	
+    	juego.moverIzquierda();
+    	
+    	int[][] estadoMatriz = juego.obtenerMatriz();
+    	
+    	assertTrue(estadoMatriz[0][0] == 2 && estadoMatriz[0][1] == 4 && estadoMatriz[0][2] == 8);
+    	assertTrue(estadoMatriz[1][0] == 2 && estadoMatriz[1][1] == 4 && estadoMatriz[1][2] == 8);
+    	assertTrue(estadoMatriz[2][0] == 2 && estadoMatriz[2][1] == 4 && estadoMatriz[2][2] == 8);
+    	assertTrue(estadoMatriz[3][0] == 2 && estadoMatriz[3][1] == 4 && estadoMatriz[3][2] == 8);
+    }
+    
+    @Test
+    void MoverDerecha () {
+    	juego.definirMatriz( new int[][] {
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8}
+    	});
+    	
+    	juego.moverDerecha();
+    	
+    	int[][] estadoMatriz = juego.obtenerMatriz();
+    	
+    	assertTrue(estadoMatriz[0][1] == 2 && estadoMatriz[0][2] == 4 && estadoMatriz[0][3] == 8);
+    	assertTrue(estadoMatriz[1][1] == 2 && estadoMatriz[1][2] == 4 && estadoMatriz[1][3] == 8);
+    	assertTrue(estadoMatriz[2][1] == 2 && estadoMatriz[2][2] == 4 && estadoMatriz[2][3] == 8);
+    	assertTrue(estadoMatriz[3][1] == 2 && estadoMatriz[3][2] == 4 && estadoMatriz[3][3] == 8);
+    }
 }

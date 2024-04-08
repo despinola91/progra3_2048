@@ -37,7 +37,7 @@ public class Juego {
 	 * @return matriz de enteros.
 	 */
 	public int[][] obtenerMatriz() {
-		return matriz;
+		return this.matriz;
 	}
 	
 	/**
@@ -45,6 +45,11 @@ public class Juego {
 	 * @return void
 	 */
 	public void definirMatriz(int[][] matrizParam) {
+		
+		if(matrizParam == null || matrizParam.length != 4 ) {
+			throw new Error("La matriz debe ser 4x4. ");
+		}
+		
 		this.matriz = matrizParam;
 	}
 
@@ -83,132 +88,145 @@ public class Juego {
 	 * Mueve todos los elementos de la matriz hacia arriba, sumando los que son iguales.
 	 */
 	public void moverArriba() {
-//		boolean seMovio = false; //Registra si se realizó algún movimiento
-//
-//	    for (int columna = 0; columna < this.matriz.length; columna++) {
-//	        int indiceUltimaFichaCombinada = -1; //Para que no se sume la misma ficha varias veces en una misma columna
-//	        for (int fila = 1; fila < this.matriz.length; fila++) {
-//	            if (this.matriz[fila][columna] != 0) {
-//	                int filaActual = fila;
-//	                while (filaActual > 0 && this.matriz[filaActual - 1][columna] == 0) {
-//	                    this.matriz[filaActual - 1][columna] = this.matriz[filaActual][columna];
-//	                    this.matriz[filaActual][columna] = 0;
-//	                    filaActual--;
-//	                    seMovio = true;
-//	                }
-//	                if (filaActual > 0 && this.matriz[filaActual - 1][columna] == this.matriz[filaActual][columna] && filaActual - 1 != indiceUltimaFichaCombinada) {
-//	                    this.matriz[filaActual - 1][columna] *= 2;
-//	                    this.matriz[filaActual][columna] = 0;
-//	                    indiceUltimaFichaCombinada = filaActual - 1;
-//	                    seMovio = true;
-//	                }
-//	            }
-//	        }
-//	    }
-//	    //Si se realizó algún movimiento, se agrega una ficha 
-//	    if (seMovio) {
-//	        //agregarFichaNueva();
-//	    }
+		boolean seMovio = false; //Registra si se realizó algún movimiento
+
+	    for (int columna = 0; columna < this.matriz.length; columna++) {
+	        int indiceUltimaFichaCombinada = -1; //Para que no se sume la misma ficha varias veces en una misma columna
+	        for (int fila = 1; fila < this.matriz.length; fila++) {
+	            if (this.matriz[fila][columna] != 0) {
+	                int filaActual = fila;
+	                while (filaActual > 0 && this.matriz[filaActual - 1][columna] == 0) {
+	                    this.matriz[filaActual - 1][columna] = this.matriz[filaActual][columna];
+	                    this.matriz[filaActual][columna] = 0;
+	                    filaActual--;
+	                    seMovio = true;
+	                }
+	                if (filaActual > 0 && this.matriz[filaActual - 1][columna] == this.matriz[filaActual][columna] && filaActual - 1 != indiceUltimaFichaCombinada) {
+	                    this.matriz[filaActual - 1][columna] *= 2;
+	                    this.matriz[filaActual][columna] = 0;
+	                    indiceUltimaFichaCombinada = filaActual - 1;
+	                    seMovio = true;
+	                }
+	            }
+	        }
+	    }
+	    //Si se realizó algún movimiento, se agrega una ficha 
+	    if (seMovio) {
+	        this.agregarNuevaFicha();
+	    }
 	}
 
 	/**
 	 * Mueve todos los elementos de la matriz hacia abajo, sumando los que son iguales.
 	 */
 	public void moverAbajo() {
-//		boolean seMovio = false; //Registra si se realizó algún movimiento
-//
-//	    for (int columna = 0; columna < this.matriz.length; columna++) {
-//	        int indiceUltimaFichaCombinada = size; //Para que no se sume la misma ficha varias veces en una misma columna
-//	        for (int fila = size - 2; fila >= 0; fila--) {
-//	            if (this.matriz[fila][columna] != 0) {
-//	                int filaActual = fila;
-//	                while (filaActual < size - 1 && this.matriz[filaActual + 1][columna] == 0) {
-//	                    this.matriz[filaActual + 1][columna] = this.matriz[filaActual][columna];
-//	                    this.matriz[filaActual][columna] = 0;
-//	                    filaActual++;
-//	                    seMovio = true;
-//	                }
-//	                if (filaActual < size - 1 && this.matriz[filaActual + 1][columna] == this.matriz[filaActual][columna] && filaActual + 1 != indiceUltimaFichaCombinada) {
-//	                    this.matriz[filaActual + 1][columna] *= 2;
-//	                    this.matriz[filaActual][columna] = 0;
-//	                    indiceUltimaFichaCombinada = filaActual + 1;
-//	                    seMovio = true;
-//	                }
-//	            }
-//	        }
-//	    }
-//	    //Si se realizó algún movimiento, se agrega una ficha 
-//	    if (seMovio) {
-//	        //agregarFichaNueva();
-//	    }
+		boolean seMovio = false; //Registra si se realizó algún movimiento
+		int size = this.matriz.length;
+
+	    for (int columna = 0; columna < this.matriz.length; columna++) {
+	        int indiceUltimaFichaCombinada = size; //Para que no se sume la misma ficha varias veces en una misma columna
+	        for (int fila = size - 2; fila >= 0; fila--) {
+	            if (this.matriz[fila][columna] != 0) {
+	                int filaActual = fila;
+	                while (filaActual < size - 1 && this.matriz[filaActual + 1][columna] == 0) {
+	                    this.matriz[filaActual + 1][columna] = this.matriz[filaActual][columna];
+	                    this.matriz[filaActual][columna] = 0;
+	                    filaActual++;
+	                    seMovio = true;
+	                }
+	                if (filaActual < size - 1 && this.matriz[filaActual + 1][columna] == this.matriz[filaActual][columna] && filaActual + 1 != indiceUltimaFichaCombinada) {
+	                    this.matriz[filaActual + 1][columna] *= 2;
+	                    this.matriz[filaActual][columna] = 0;
+	                    indiceUltimaFichaCombinada = filaActual + 1;
+	                    seMovio = true;
+	                }
+	            }
+	        }
+	    }
+	    //Si se realizó algún movimiento, se agrega una ficha 
+	    if (seMovio) {
+	        this.agregarNuevaFicha();
+	    }
 	}
 
 	/**
 	 * Mueve todos los elementos de la matriz hacia la izquierda, sumando los que son iguales.
 	 */
 	public void moverIzquierda() {
-//		boolean seMovio = false; //Registra si se realizó algún movimiento
-//
-//	    for (int fila = 0; fila < this.matriz.length; fila++) {
-//	        int indiceUltimaFichaCombinada = -1; //Para que no se sume la misma ficha varias veces en una misma fila
-//	        for (int columna = 1; columna < this.matriz.length; columna++) {
-//	            if (this.matriz[fila][columna] != 0) {
-//	                int columnaActual = columna;
-//	                while (columnaActual > 0 && this.matriz[fila][columnaActual - 1] == 0) {
-//	                    this.matriz[fila][columnaActual - 1] = this.matriz[fila][columnaActual];
-//	                    this.matriz[fila][columnaActual] = 0;
-//	                    columnaActual--;
-//	                    seMovio = true;
-//	                }
-//	                if (columnaActual > 0 && this.matriz[fila][columnaActual - 1] == this.matriz[fila][columnaActual] && columnaActual - 1 != indiceUltimaFichaCombinada) {
-//	                    this.matriz[fila][columnaActual - 1] *= 2;
-//	                    this.matriz[fila][columnaActual] = 0;
-//	                    indiceUltimaFichaCombinada = columnaActual - 1;
-//	                    seMovio = true;
-//	                }
-//	            }
-//	        }
-//	    }
-//	    //Si se realizó algún movimiento, se agrega una ficha 
-//	    if (seMovio) {
-//	        //agregarFichaNueva();
-//	    }
+		boolean seMovio = false; //Registra si se realizó algún movimiento
+
+	    for (int fila = 0; fila < this.matriz.length; fila++) {
+	        int indiceUltimaFichaCombinada = -1; //Para que no se sume la misma ficha varias veces en una misma fila
+	        for (int columna = 1; columna < this.matriz.length; columna++) {
+	            if (this.matriz[fila][columna] != 0) {
+	                int columnaActual = columna;
+	                while (columnaActual > 0 && this.matriz[fila][columnaActual - 1] == 0) {
+	                    this.matriz[fila][columnaActual - 1] = this.matriz[fila][columnaActual];
+	                    this.matriz[fila][columnaActual] = 0;
+	                    columnaActual--;
+	                    seMovio = true;
+	                }
+	                if (columnaActual > 0 && this.matriz[fila][columnaActual - 1] == this.matriz[fila][columnaActual] && columnaActual - 1 != indiceUltimaFichaCombinada) {
+	                    this.matriz[fila][columnaActual - 1] *= 2;
+	                    this.matriz[fila][columnaActual] = 0;
+	                    indiceUltimaFichaCombinada = columnaActual - 1;
+	                    seMovio = true;
+	                }
+	            }
+	        }
+	    }
+	    //Si se realizó algún movimiento, se agrega una ficha 
+	    if (seMovio) {
+	        agregarNuevaFicha();
+	    }
 	}
 
 	/**
 	 * Mueve todos los elementos de la matriz hacia la derecha, sumando los que son iguales.
 	 */
 	public void moverDerecha() {
-//		boolean seMovio = false; //Registra si se realizó algún movimiento
-//
-//	    for (int fila = 0; fila < this.matriz.length; fila++) {
-//	        int indiceUltimaFichaCombinada = this.matriz.length; //Para que no se sume la misma ficha varias veces en una misma fila
-//	        for (int columna = size - 2; columna >= 0; columna--) {
-//	            if (this.matriz[fila][columna] != 0) {
-//	                int columnaActual = columna;
-//	                while (columnaActual < size - 1 && this.matriz[fila][columnaActual + 1] == 0) {
-//	                    this.matriz[fila][columnaActual + 1] = this.matriz[fila][columnaActual];
-//	                    this.matriz[fila][columnaActual] = 0;
-//	                    columnaActual++;
-//	                    seMovio = true;
-//	                }
-//	                if (columnaActual < size - 1 && this.matriz[fila][columnaActual + 1] == this.matriz[fila][columnaActual] && columnaActual + 1 != indiceUltimaFichaCombinada) {
-//	                    this.matriz[fila][columnaActual + 1] *= 2;
-//	                    this.matriz[fila][columnaActual] = 0;
-//	                    indiceUltimaFichaCombinada = columnaActual + 1;
-//	                    seMovio = true;
-//	                }
-//	            }
-//	        }
-//	    }
-//	    //Si se realizó algún movimiento, se agrega una ficha 
-//	    if (seMovio) {
-//	        //agregarFichaNueva();
-//	    }
+		boolean seMovio = false; //Registra si se realizó algún movimiento
+		int size = this.matriz.length;
+
+	    for (int fila = 0; fila < this.matriz.length; fila++) {
+	        int indiceUltimaFichaCombinada = this.matriz.length; //Para que no se sume la misma ficha varias veces en una misma fila
+	        for (int columna = size - 2; columna >= 0; columna--) {
+	            if (this.matriz[fila][columna] != 0) {
+	                int columnaActual = columna;
+	                while (columnaActual < size - 1 && this.matriz[fila][columnaActual + 1] == 0) {
+	                    this.matriz[fila][columnaActual + 1] = this.matriz[fila][columnaActual];
+	                    this.matriz[fila][columnaActual] = 0;
+	                    columnaActual++;
+	                    seMovio = true;
+	                }
+	                if (columnaActual < size - 1 && this.matriz[fila][columnaActual + 1] == this.matriz[fila][columnaActual] && columnaActual + 1 != indiceUltimaFichaCombinada) {
+	                    this.matriz[fila][columnaActual + 1] *= 2;
+	                    this.matriz[fila][columnaActual] = 0;
+	                    indiceUltimaFichaCombinada = columnaActual + 1;
+	                    seMovio = true;
+	                }
+	            }
+	        }
+	    }
+	    //Si se realizó algún movimiento, se agrega una ficha 
+	    if (seMovio) {
+	        agregarNuevaFicha();
+	    }
 	}
 
 	
 	//Métodos internos
+	/**
+	 * Metodo privado, agrega una nueva ficha en algun espacio random que este disponible y con el valor 2
+	 * @return void
+	 */
+	private void agregarNuevaFicha() {
+		Posicion posicionDisponible = this.obtenerPosicionRandomDisponible();
+		int filaDisponible = posicionDisponible.obtenerFila();
+		int columnaDisponible = posicionDisponible.obtenerColumna();
+		
+		this.matriz[filaDisponible][columnaDisponible] = 2;
+	}
 	
 	/**
 	 * Obtiene un valor entero random a partir de una lista dada.
