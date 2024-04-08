@@ -170,6 +170,11 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	    		
 	}
 
+	//Metodo reiniciar juego // hay que usar el metodo luego cuando este codificado el ganar o perder en el back
+	private void reiniciarJuego() {
+		juego = new Juego(); // Crear una nueva instancia de Juego
+		actualizarTablero(); // Actualizar el tablero con una nueva instancia
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
