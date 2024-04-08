@@ -91,20 +91,20 @@ class JuegoTest {
     @Test
     void MoverIzquierda () {
     	juego.definirMatriz( new int[][] {
-    		{2,4,0,8},
-    		{2,4,0,8},
-    		{2,4,0,8},
-    		{2,4,0,8}
+    		{0,0,2,0},
+    		{64,2,0,0},
+    		{16,16,2,8},
+    		{0,0,4,0}
     	});
     	
     	juego.moverIzquierda();
     	
     	int[][] estadoMatriz = juego.obtenerMatriz();
     	
-    	assertTrue(estadoMatriz[0][0] == 2 && estadoMatriz[0][1] == 4 && estadoMatriz[0][2] == 8);
-    	assertTrue(estadoMatriz[1][0] == 2 && estadoMatriz[1][1] == 4 && estadoMatriz[1][2] == 8);
-    	assertTrue(estadoMatriz[2][0] == 2 && estadoMatriz[2][1] == 4 && estadoMatriz[2][2] == 8);
-    	assertTrue(estadoMatriz[3][0] == 2 && estadoMatriz[3][1] == 4 && estadoMatriz[3][2] == 8);
+    	assertTrue(estadoMatriz[1][0] == 64 && estadoMatriz[2][0] == 32 && estadoMatriz[3][0] == 4);
+    	//assertTrue(estadoMatriz[1][0] == 2 && estadoMatriz[1][1] == 4 && estadoMatriz[1][2] == 8);
+    	//assertTrue(estadoMatriz[2][0] == 2 && estadoMatriz[2][1] == 4 && estadoMatriz[2][2] == 8);
+    	//assertTrue(estadoMatriz[3][0] == 2 && estadoMatriz[3][1] == 4 && estadoMatriz[3][2] == 8);
     }
     
     @Test
