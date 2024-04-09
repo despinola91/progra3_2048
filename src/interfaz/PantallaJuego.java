@@ -131,24 +131,24 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	//cambia de color el fondo de la celda segùn el valor resultado de la suma
 	private Color cambiaColorCelda(int valor) {
 		switch (valor) {
-			case 4:
 			case 8:
 				return new Color(255, 204, 153); // Naranja claro
 			case 16:
 				return new Color(205, 153, 51); // Naranja medio
 			case 32:
-				return new Color(255, 51, 51); // Naranja mas oscuro
+				return new Color(255, 99, 71); // Naranja fuert
 			case 64:
+				return new Color(255, 51, 51); // Naranja mas oscuro
 			case 128:
-				return new Color(255, 99, 71); // Naranja fuerte
 			case 256:
+				return new Color(255, 120, 80); // Naranja fuerte
 			case 512:
-				return new Color(220, 20, 60); // Rojo
 			case 1024:
+				return new Color(220, 20, 60); // Rojo
 			case 2048:
 				return new Color(255, 0, 255); // Fuccia o rosado fuerte
 				
-			default: // Numero 2
+			default: // Numero 2 y 4
 				return new Color(210, 180, 140); // Color marron claro, como empieza
 		}
 	}
