@@ -63,12 +63,14 @@ class JuegoTest {
     		{2,4,0,8}
     	});
     	
-    	juego.moverArriba();
+    	juego.moverElementosArriba();
     	
     	int[][] estadoMatriz = juego.obtenerMatriz();
-    	
-    	assertTrue(estadoMatriz[0][0] == 4 && estadoMatriz[0][1] == 8 && estadoMatriz[0][3] == 16);
-    	assertTrue(estadoMatriz[1][0] == 4 && estadoMatriz[1][1] == 8 && estadoMatriz[1][3] == 16);
+
+        assertArrayEquals(new int[]{4,8,0,16}, estadoMatriz[0]);
+        assertArrayEquals(new int[]{4,8,0,16}, estadoMatriz[1]);
+        assertArrayEquals(new int[]{0,0,0,0}, estadoMatriz[2]);
+        assertArrayEquals(new int[]{0,0,0,0}, estadoMatriz[3]);
     }
     
     @Test
@@ -80,12 +82,14 @@ class JuegoTest {
     		{2,4,0,8}
     	});
     	
-    	juego.moverAbajo();
+    	juego.moverElementosAbajo();
     	
     	int[][] estadoMatriz = juego.obtenerMatriz();
-    	
-    	assertTrue(estadoMatriz[2][0] == 4 && estadoMatriz[2][1] == 8 && estadoMatriz[2][3] == 16);
-    	assertTrue(estadoMatriz[3][0] == 4 && estadoMatriz[3][1] == 8 && estadoMatriz[3][3] == 16);
+
+        assertArrayEquals(new int[]{0,0,0,0}, estadoMatriz[0]);
+        assertArrayEquals(new int[]{0,0,0,0}, estadoMatriz[1]);
+        assertArrayEquals(new int[]{4,8,0,16}, estadoMatriz[2]);
+        assertArrayEquals(new int[]{4,8,0,16}, estadoMatriz[3]);
     }
     
     @Test
@@ -97,14 +101,14 @@ class JuegoTest {
     		{2,4,0,8}
     	});
     	
-    	juego.moverIzquierda();
+    	juego.moverElementosIzquierda();
     	
     	int[][] estadoMatriz = juego.obtenerMatriz();
-    	
-    	assertTrue(estadoMatriz[0][0] == 2 && estadoMatriz[0][1] == 4 && estadoMatriz[0][2] == 8);
-    	assertTrue(estadoMatriz[1][0] == 2 && estadoMatriz[1][1] == 4 && estadoMatriz[1][2] == 8);
-    	assertTrue(estadoMatriz[2][0] == 2 && estadoMatriz[2][1] == 4 && estadoMatriz[2][2] == 8);
-    	assertTrue(estadoMatriz[3][0] == 2 && estadoMatriz[3][1] == 4 && estadoMatriz[3][2] == 8);
+
+        assertArrayEquals(new int[]{2,4,8,0}, estadoMatriz[0]);
+        assertArrayEquals(new int[]{2,4,8,0}, estadoMatriz[1]);
+        assertArrayEquals(new int[]{2,4,8,0}, estadoMatriz[2]);
+        assertArrayEquals(new int[]{2,4,8,0}, estadoMatriz[3]);
     }
     
     @Test
@@ -116,13 +120,13 @@ class JuegoTest {
     		{2,4,0,8}
     	});
     	
-    	juego.moverDerecha();
+    	juego.moverElementosDerecha();
     	
     	int[][] estadoMatriz = juego.obtenerMatriz();
     	
-    	assertTrue(estadoMatriz[0][1] == 2 && estadoMatriz[0][2] == 4 && estadoMatriz[0][3] == 8);
-    	assertTrue(estadoMatriz[1][1] == 2 && estadoMatriz[1][2] == 4 && estadoMatriz[1][3] == 8);
-    	assertTrue(estadoMatriz[2][1] == 2 && estadoMatriz[2][2] == 4 && estadoMatriz[2][3] == 8);
-    	assertTrue(estadoMatriz[3][1] == 2 && estadoMatriz[3][2] == 4 && estadoMatriz[3][3] == 8);
+    	assertArrayEquals(new int[]{0,2,4,8}, estadoMatriz[0]);
+        assertArrayEquals(new int[]{0,2,4,8}, estadoMatriz[1]);
+        assertArrayEquals(new int[]{0,2,4,8}, estadoMatriz[2]);
+        assertArrayEquals(new int[]{0,2,4,8}, estadoMatriz[3]);
     }
 }
