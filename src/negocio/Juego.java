@@ -225,7 +225,7 @@ public class Juego {
 		int filaDisponible = posicionDisponible.obtenerFila();
 		int columnaDisponible = posicionDisponible.obtenerColumna();
 		
-		this.matriz[filaDisponible][columnaDisponible] = 2;
+		this.matriz[filaDisponible][columnaDisponible] = obtenerValorRandom();
 	}
 	
 	/**
