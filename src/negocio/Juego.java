@@ -85,9 +85,22 @@ public class Juego {
 	}
 	
 	/**
-	 * Mueve todos los elementos de la matriz hacia arriba, sumando los que son iguales.
+	 * Ejecuta la acción de mover los elementos hacia arriba y si hubo movimiento, agrega una nueva ficha.
 	 */
 	public void moverArriba() {
+		boolean seMovio = moverElementosArriba();
+
+	    //Si se realizó algún movimiento, se agrega una ficha 
+	    if (seMovio) {
+	        this.agregarNuevaFicha();
+	    }
+	}
+
+	/**
+	 * Mueve todos los elementos de la matriz hacia arriba, sumando los que son iguales.
+	 * @return valor booleano indicando si hubo movimiento en el tablero.
+	 */
+	public boolean moverElementosArriba() {
 		boolean seMovio = false; //Registra si se realizó algún movimiento
 
 	    for (int columna = 0; columna < this.matriz.length; columna++) {
@@ -110,6 +123,16 @@ public class Juego {
 	            }
 	        }
 	    }
+
+		return seMovio;
+	}
+
+	/**
+	 * Ejecuta la acción de mover los elementos hacia abajo y si hubo movimiento, agrega una nueva ficha.
+	 */
+	public void moverAbajo() {
+		boolean seMovio = moverElementosAbajo();
+
 	    //Si se realizó algún movimiento, se agrega una ficha 
 	    if (seMovio) {
 	        this.agregarNuevaFicha();
@@ -118,8 +141,9 @@ public class Juego {
 
 	/**
 	 * Mueve todos los elementos de la matriz hacia abajo, sumando los que son iguales.
+	 * @return valor booleano indicando si hubo movimiento en el tablero.
 	 */
-	public void moverAbajo() {
+	public boolean moverElementosAbajo() {
 		boolean seMovio = false; //Registra si se realizó algún movimiento
 		int size = this.matriz.length;
 
@@ -143,16 +167,27 @@ public class Juego {
 	            }
 	        }
 	    }
+
+		return seMovio;
+	}
+
+	/**
+	 * Ejecuta la acción de mover los elementos hacia la izquierda y si hubo movimiento, agrega una nueva ficha.
+	 */
+	public void moverIzquierda() {
+		boolean seMovio = moverElementosIzquierda();
+
 	    //Si se realizó algún movimiento, se agrega una ficha 
 	    if (seMovio) {
-	        this.agregarNuevaFicha();
+	        agregarNuevaFicha();
 	    }
 	}
 
 	/**
 	 * Mueve todos los elementos de la matriz hacia la izquierda, sumando los que son iguales.
+	 * @return valor booleano indicando si hubo movimiento en el tablero.
 	 */
-	public void moverIzquierda() {
+	public boolean moverElementosIzquierda() {
 		boolean seMovio = false; //Registra si se realizó algún movimiento
 
 	    for (int fila = 0; fila < this.matriz.length; fila++) {
@@ -175,6 +210,16 @@ public class Juego {
 	            }
 	        }
 	    }
+
+		return seMovio;
+	}
+	
+	/**
+	 * Ejecuta la acción de mover los elementos hacia la derecha y si hubo movimiento, agrega una nueva ficha.
+	 */
+	public void moverDerecha() {
+		boolean seMovio = moverElementosDerecha();
+
 	    //Si se realizó algún movimiento, se agrega una ficha 
 	    if (seMovio) {
 	        agregarNuevaFicha();
@@ -183,8 +228,9 @@ public class Juego {
 
 	/**
 	 * Mueve todos los elementos de la matriz hacia la derecha, sumando los que son iguales.
-	 */
-	public void moverDerecha() {
+	 * @return valor booleano indicando si hubo movimiento en el tablero.
+	 */	
+	public boolean moverElementosDerecha() {
 		boolean seMovio = false; //Registra si se realizó algún movimiento
 		int size = this.matriz.length;
 
@@ -208,10 +254,8 @@ public class Juego {
 	            }
 	        }
 	    }
-	    //Si se realizó algún movimiento, se agrega una ficha 
-	    if (seMovio) {
-	        agregarNuevaFicha();
-	    }
+
+		return seMovio;
 	}
 
 	
