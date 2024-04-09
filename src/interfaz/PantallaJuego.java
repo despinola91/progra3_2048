@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -170,11 +171,16 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	    		
 	}
 
-	//Metodo reiniciar juego // hay que usar el metodo luego cuando este codificado el ganar o perder en el back
-	private void reiniciarJuego() {
-		juego = new Juego(); // Crear una nueva instancia de Juego
-		actualizarTablero(); // Actualizar el tablero con una nueva instancia
-	}
+	//Verifica si el juego esta ganado o perdido
+	public void verificarEstadoJuego() {
+        if (juego.juegoGanado()) {
+            JOptionPane.showMessageDialog(this, "JUEGO GANADO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
+            juego.iniciarMatriz();
+        } else if (juego.juegoPerdido()) {
+            JOptionPane.showMessageDialog(this, "JUEGO PERDIDO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
+            juego.iniciarMatriz(); 
+        }
+    }
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -200,7 +206,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 			break;
 		}
 		actualizarTablero();
-	
+		verificarEstadoJuego();
 
 	
 	}

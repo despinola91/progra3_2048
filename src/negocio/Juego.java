@@ -248,4 +248,47 @@ public class Juego {
         int randomIndex = generator.nextInt(list.size());
         return list.get(randomIndex);
 	}
+
+	// GANA JUEGO: si encuentra alguna celda con valor 2048
+	public boolean juegoGanado() {
+		for (int[] fila : matriz) {
+			for (int valor : fila) {
+				if (valor == 2048) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	//PIERDE JUEGO: si no hay movimientos disponibles en ninguna direccion
+	public boolean juegoPerdido() {
+		return !hayMovimientosDisponibles();
+	}
+	
+	// Verifica si aun hay movimientos disponibles
+	private boolean hayMovimientosDisponibles() {
+		for (int fila = 0; fila < matriz.length; fila++) {
+			for (int columna = 0; columna < matriz[0].length; columna++) {
+				// Verificar si hay casillas vacías
+				if (matriz[fila][columna] == 0) {
+					return true;
+				}
+				// Verificar si se pueden combinar fichas en las cuatro direcciones
+				if (fila > 0 && matriz[fila][columna] == matriz[fila - 1][columna]) {
+					return true;
+				}
+				if (fila < matriz.length - 1 && matriz[fila][columna] == matriz[fila + 1][columna]) {
+					return true;
+				}
+				if (columna > 0 && matriz[fila][columna] == matriz[fila][columna - 1]) {
+					return true;
+				}
+				if (columna < matriz[0].length - 1 && matriz[fila][columna] == matriz[fila][columna + 1]) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
