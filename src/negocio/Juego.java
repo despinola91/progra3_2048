@@ -270,11 +270,11 @@ public class Juego {
 	private boolean hayMovimientosDisponibles() {
 		for (int fila = 0; fila < matriz.length; fila++) {
 			for (int columna = 0; columna < matriz[0].length; columna++) {
-				// Verificar si hay casillas vacías
+				// Verifica si hay alguna celda vacia
 				if (matriz[fila][columna] == 0) {
 					return true;
 				}
-				// Verificar si se pueden combinar fichas en las cuatro direcciones
+				//Verifica si se pueden conbinar celdas en las 4 direcciones
 				if (fila > 0 && matriz[fila][columna] == matriz[fila - 1][columna]) {
 					return true;
 				}

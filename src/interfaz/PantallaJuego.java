@@ -50,9 +50,6 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 		//Configuraciones de la ventana
 
-		//se elimina el ícono porque trae problemas al momento de push y pull (no se transfiere la imagen)
-		//setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaJuego.class.getResource("/game_2048/2048icon.png")));
-		
 		//Se inicia la Matriz de la clase estatica de juego
 		juego.iniciarMatriz();
 			
@@ -108,8 +105,6 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		setFocusTraversalKeysEnabled(false); //desactiva teclas que me puedan cambiar que el foco de la ventana
 
 		actualizarTablero();
-		
-
 
 	}
 		
@@ -136,6 +131,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	//cambia de color el fondo de la celda segùn el valor resultado de la suma
 	private Color cambiaColorCelda(int valor) {
 		switch (valor) {
+			case 4:
 			case 8:
 				return new Color(255, 204, 153); // Naranja claro
 			case 16:
@@ -144,21 +140,19 @@ public class PantallaJuego extends JFrame implements KeyListener{
 				return new Color(255, 51, 51); // Naranja mas oscuro
 			case 64:
 			case 128:
-			case 256:
 				return new Color(255, 99, 71); // Naranja fuerte
+			case 256:
 			case 512:
-			case 1024:
 				return new Color(220, 20, 60); // Rojo
+			case 1024:
 			case 2048:
 				return new Color(255, 0, 255); // Fuccia o rosado fuerte
 				
-			default: // 2 y 4 son iguales
+			default: // Numero 2
 				return new Color(210, 180, 140); // Color marron claro, como empieza
 		}
 	}
-	
-	
-	
+
 	
 	//para cambiar el texto cuando la suma da mas de 8
 	private Color obtenerColorTexto(int valor) {
@@ -207,12 +201,9 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		}
 		actualizarTablero();
 		verificarEstadoJuego();
-
-	
 	}
 	
 	
-    
     @Override
 	public void keyReleased(KeyEvent e) {
 		//...
