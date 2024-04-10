@@ -1,5 +1,6 @@
 package interfaz;
 //prueba de cambios git
+import negocio.Juego;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -12,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -22,8 +24,8 @@ import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
 
 public class PantallaJuego extends JFrame implements KeyListener{
-
-	private Logica logica;
+	
+	private Juego juego = new Juego();
 	private JButton[][] botones;
 	private JPanel panelTablero;
 
@@ -45,21 +47,17 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	}
 
 	private void initialize() {
-		//Configuraciones de la ventana
 
-		//se elimina el ícono porque trae problemas al momento de push y pull (no se transfiere la imagen)
-		//setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaJuego.class.getResource("/game_2048/2048icon.png")));
-		
+		//Configuraciones de la ventana
 			
 		setTitle("2048");
 		setBounds(300, 20, 450, 530);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.logica = new Logica(this);
 		getContentPane().setBackground(new Color(224, 255, 255));
 
 		getContentPane().setLayout(null);
 
-		
+	
 		panelTablero = new JPanel();
 		panelTablero.setBackground(new Color(210, 180, 140));
 		panelTablero.setBounds(10, 70, 414, 337);
@@ -104,8 +102,6 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		setFocusTraversalKeysEnabled(false); //desactiva teclas que me puedan cambiar que el foco de la ventana
 
 		actualizarTablero();
-		
-
 
 	}
 		
@@ -113,9 +109,10 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 	//Nexo entre logica e interfaz
 	private void actualizarTablero() { //Actualizo el tablero con metodo que busca los valores que hay en cada celda. Me los traigo de la logica
+		int[][] matriz = juego.obtenerMatriz();
 		for (int fila = 0; fila < 4; fila++) {
 			for (int columna = 0; columna < 4; columna++) {
-				int valor = logica.obtenerValorCelda(fila, columna);
+				int valor = matriz[fila][columna];
 				botones[fila][columna].setText(valor == 0 ? "" : String.valueOf(valor)); //muestra el nro unicamente si es distinto de 0
 								
 				 // Cambiar el color según el valor usando el metodo cambiaColorCelda
@@ -131,29 +128,33 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	//cambia de color el fondo de la celda segùn el valor resultado de la suma
 	private Color cambiaColorCelda(int valor) {
 		switch (valor) {
-			case 8:
-				return new Color(255, 204, 153); // Naranja claro
-			case 16:
-				return new Color(205, 153, 51); // Naranja medio
-			case 32:
-				return new Color(255, 51, 51); // Naranja mas oscuro
-			case 64:
-			case 128:
-			case 256:
-				return new Color(255, 99, 71); // Naranja fuerte
-			case 512:
-			case 1024:
-				return new Color(220, 20, 60); // Rojo
-			case 2048:
-				return new Color(255, 0, 255); // Fuccia o rosado fuerte
-				
-			default: // 2 y 4 son iguales
-				return new Color(210, 180, 140); // Color marron claro, como empieza
+			case 2:
+            return new Color(209, 196, 177); // Marrón claro
+        case 4:
+            return new Color(237, 224, 200); // Naranja claro
+        case 8:
+            return new Color(245, 149, 99); // Naranja más oscuro
+        case 16:
+            return new Color(245, 124, 95); // Naranja medio
+        case 32:
+            return new Color(246, 94, 59); // Naranja
+        case 64:
+            return new Color(246, 76, 47); // Naranja más fuerte
+        case 128:
+            return new Color(236, 203, 118); // Rojo claro
+        case 256:
+            return new Color(236, 188, 97); // Rojo medio
+        case 512:
+            return new Color(236, 152, 80); // Rojo
+        case 1024:
+            return new Color(236, 133, 63); // Rojo oscuro
+        case 2048:
+            return new Color(236, 99, 46); // Rojo más oscuro
+        default:
+            return new Color(210, 180, 140); // Color marrón claro, como empieza
 		}
 	}
-	
-	
-	
+
 	
 	//para cambiar el texto cuando la suma da mas de 8
 	private Color obtenerColorTexto(int valor) {
@@ -166,6 +167,16 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	    		
 	}
 
+	//Verifica si el juego esta ganado o perdido
+	public void verificarEstadoJuego() {
+        if (juego.juegoGanado()) {
+            JOptionPane.showMessageDialog(this, "JUEGO GANADO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
+            juego.iniciarMatriz();
+        } else if (juego.juegoPerdido()) {
+            JOptionPane.showMessageDialog(this, "JUEGO PERDIDO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
+            juego.iniciarMatriz(); 
+        }
+    }
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -178,26 +189,23 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		int keyCode = e.getKeyCode();
 		switch (keyCode) {
 		case KeyEvent.VK_UP:
-			logica.moverArriba();
+			juego.moverArriba();
 			break;
 		case KeyEvent.VK_DOWN:
-			logica.moverAbajo();
+			juego.moverAbajo();
 			break;
 		case KeyEvent.VK_LEFT:
-			logica.moverIzquierda();
+			juego.moverIzquierda();
 			break;
 		case KeyEvent.VK_RIGHT:
-			logica.moverDerecha();
+			juego.moverDerecha();
 			break;
 		}
 		actualizarTablero();
-	
-
-	
+		verificarEstadoJuego();
 	}
 	
 	
-    
     @Override
 	public void keyReleased(KeyEvent e) {
 		//...
