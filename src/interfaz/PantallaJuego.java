@@ -49,9 +49,6 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	private void initialize() {
 
 		//Configuraciones de la ventana
-
-		//Se inicia la Matriz de la clase estatica de juego
-		juego.iniciarMatriz();
 			
 		setTitle("2048");
 		setBounds(300, 20, 450, 530);
@@ -60,7 +57,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 		getContentPane().setLayout(null);
 
-		
+	
 		panelTablero = new JPanel();
 		panelTablero.setBackground(new Color(210, 180, 140));
 		panelTablero.setBounds(10, 70, 414, 337);
