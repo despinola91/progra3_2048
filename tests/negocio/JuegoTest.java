@@ -95,10 +95,10 @@ class JuegoTest {
     @Test
     void MoverIzquierda () {
     	juego.definirMatriz( new int[][] {
-    		{0,0,2,0},
-    		{64,2,0,0},
-    		{16,16,2,8},
-    		{0,0,4,0}
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8}
     	});
     	
     	juego.moverElementosIzquierda();
