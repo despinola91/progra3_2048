@@ -17,12 +17,12 @@ class JuegoTest {
     }
 
     @Test
-    void ObtenerValorRandomTest() {
+    void obtenerValorRandomTest() {
         assertThat(juego.obtenerValorRandom(), anyOf(equalTo(2), equalTo(4)));
     }
     
     @Test
-    void ObtenerPosicionDisponible() {
+    void obtenerPosicionDisponible() {
         juego.definirMatriz( new int[][]{
             {1, 1, 1, 1},
             {1, 1, 1, 1},
@@ -55,7 +55,7 @@ class JuegoTest {
     }
     
     @Test
-    void MoverArriba () {
+    void moverArriba () {
     	juego.definirMatriz( new int[][] {
     		{2,4,0,8},
     		{2,4,0,8},
@@ -74,7 +74,7 @@ class JuegoTest {
     }
     
     @Test
-    void MoverAbajo () {
+    void moverAbajo () {
     	juego.definirMatriz( new int[][] {
     		{2,4,0,8},
     		{2,4,0,8},
@@ -93,7 +93,7 @@ class JuegoTest {
     }
     
     @Test
-    void MoverIzquierda () {
+    void moverIzquierda () {
     	juego.definirMatriz( new int[][] {
     		{2,4,0,8},
     		{2,4,0,8},
@@ -112,7 +112,7 @@ class JuegoTest {
     }
     
     @Test
-    void MoverDerecha () {
+    void moverDerecha () {
     	juego.definirMatriz( new int[][] {
     		{2,4,0,8},
     		{2,4,0,8},
@@ -128,5 +128,19 @@ class JuegoTest {
         assertArrayEquals(new int[]{0,2,4,8}, estadoMatriz[1]);
         assertArrayEquals(new int[]{0,2,4,8}, estadoMatriz[2]);
         assertArrayEquals(new int[]{0,2,4,8}, estadoMatriz[3]);
+    }
+
+    @Test
+    void incrementarPuntaje() {
+        juego.definirMatriz( new int[][] {
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,0,8,8}
+    	});
+
+        juego.moverElementosDerecha();
+
+        assertEquals(16, juego.obtenerPuntaje());
     }
 }

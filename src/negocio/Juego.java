@@ -6,9 +6,11 @@ public class Juego {
 	
 	//Propiedades
 	private int [][] matriz = new int[4][4];
+	private int puntaje;
 	
 	public Juego() {
 		this.iniciarMatriz();
+		this.puntaje = 0;
 	};
 	
 	//Métodos disponibles para la interfaz
@@ -116,6 +118,7 @@ public class Juego {
 	                }
 	                if (filaActual > 0 && this.matriz[filaActual - 1][columna] == this.matriz[filaActual][columna] && filaActual - 1 != indiceUltimaFichaCombinada) {
 	                    this.matriz[filaActual - 1][columna] *= 2;
+						this.incrementarPuntaje(this.matriz[filaActual - 1][columna]);
 	                    this.matriz[filaActual][columna] = 0;
 	                    indiceUltimaFichaCombinada = filaActual - 1;
 	                    seMovio = true;
@@ -159,6 +162,7 @@ public class Juego {
 	                }
 	                if (filaActual < size - 1 && this.matriz[filaActual + 1][columna] == this.matriz[filaActual][columna] && filaActual + 1 != indiceUltimaFichaCombinada) {
 	                    this.matriz[filaActual + 1][columna] *= 2;
+						this.incrementarPuntaje(this.matriz[filaActual - 1][columna]);
 	                    this.matriz[filaActual][columna] = 0;
 	                    indiceUltimaFichaCombinada = filaActual + 1;
 	                    seMovio = true;
@@ -202,6 +206,7 @@ public class Juego {
 	                }
 	                if (columnaActual > 0 && this.matriz[fila][columnaActual - 1] == this.matriz[fila][columnaActual] && columnaActual - 1 != indiceUltimaFichaCombinada) {
 	                    this.matriz[fila][columnaActual - 1] *= 2;
+						this.incrementarPuntaje(this.matriz[fila][columnaActual - 1]);
 	                    this.matriz[fila][columnaActual] = 0;
 	                    indiceUltimaFichaCombinada = columnaActual - 1;
 	                    seMovio = true;
@@ -246,6 +251,7 @@ public class Juego {
 	                }
 	                if (columnaActual < size - 1 && this.matriz[fila][columnaActual + 1] == this.matriz[fila][columnaActual] && columnaActual + 1 != indiceUltimaFichaCombinada) {
 	                    this.matriz[fila][columnaActual + 1] *= 2;
+						this.incrementarPuntaje(this.matriz[fila][columnaActual + 1]);
 	                    this.matriz[fila][columnaActual] = 0;
 	                    indiceUltimaFichaCombinada = columnaActual + 1;
 	                    seMovio = true;
@@ -257,6 +263,17 @@ public class Juego {
 		return seMovio;
 	}
 
+	/**
+	 * Devuelve el puntaje de la partida actual.
+	 * @return entero representando el puntaje actual.
+	 */
+	public int obtenerPuntaje() {
+		return this.puntaje;
+	}
+
+	public void incrementarPuntaje(int puntaje) {
+		this.puntaje += puntaje;
+	}
 	
 	//Métodos internos
 	/**
