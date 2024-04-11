@@ -352,4 +352,13 @@ public class Juego {
 		}
 		return false;
 	}
+
+	public void limpiarMatriz() {
+		for (int fila = 0; fila < matriz.length; fila++) {
+			for (int columna = 0; columna < matriz[0].length; columna++) {
+		
+					matriz[fila][columna] = 0;
+			}
+		}
+	}
 }

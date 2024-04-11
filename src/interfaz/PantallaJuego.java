@@ -91,6 +91,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		lblPuntaje.setBounds(10, 420, 131, 33);
 		getContentPane().add(lblPuntaje);
 		
+		//Fondo
 		JLabel lblFondo = new JLabel("New label");
 		lblFondo.setIcon(new ImageIcon("figura3.png"));
 		lblFondo.setBounds(0, 0, 436, 493);
@@ -171,9 +172,11 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	public void verificarEstadoJuego() {
         if (juego.juegoGanado()) {
             JOptionPane.showMessageDialog(this, "JUEGO GANADO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
+            juego.limpiarMatriz();
             juego.iniciarMatriz();
         } else if (juego.juegoPerdido()) {
             JOptionPane.showMessageDialog(this, "JUEGO PERDIDO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
+            juego.limpiarMatriz();
             juego.iniciarMatriz(); 
         }
     }
