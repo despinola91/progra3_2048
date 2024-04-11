@@ -55,7 +55,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		//Configuraciones de la ventana
 			
 		setTitle("2048");
-		setBounds(300, 20, 450, 530);
+		setBounds(300, 20, 602, 530);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(new Color(224, 255, 255));
 
@@ -64,7 +64,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	
 		panelTablero = new JPanel();
 		panelTablero.setBackground(new Color(210, 180, 140));
-		panelTablero.setBounds(10, 70, 414, 337);
+		panelTablero.setBounds(82, 83, 414, 337);
 		getContentPane().add(panelTablero);
 		panelTablero.setLayout(new GridLayout(4,4));
 	
@@ -82,23 +82,26 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 		// Título "2048"
 		JLabel lbl2048 = new JLabel("2048");
+		lbl2048.setIcon(new ImageIcon("C:\\Users\\Josy\\Documents\\GitHub\\progra3_2048\\2048_log.png"));
 		lbl2048.setForeground(new Color(210, 180, 140));
-		lbl2048.setFont(new Font("Segoe UI Black", Font.PLAIN, 40));
-		lbl2048.setBounds(10, 11, 110, 48);
+		lbl2048.setFont(new Font("Segoe UI Black", Font.PLAIN, 43));
+		lbl2048.setBounds(82, 15, 175, 48);
 		getContentPane().add(lbl2048);
 	
 
 		// Puntaje
-		JLabel lblPuntaje = new JLabel("Puntaje:   "+juego.obtenerPuntaje());
-		lblPuntaje.setForeground(new Color(210, 180, 140));
-		lblPuntaje.setFont(new Font("Segoe UI Black", Font.PLAIN, 18));
-		lblPuntaje.setBounds(10, 420, 131, 33);
+		JLabel lblPuntaje = new JLabel("Puntaje:   ");
+		lblPuntaje.setForeground(Color.CYAN);
+		lblPuntaje.setFont(new Font("Segoe UI Black", Font.BOLD, 24));
+		lblPuntaje.setBounds(341, 30, 131, 33);
 		getContentPane().add(lblPuntaje);
 		
+		
+		
 		//Fondo
-		JLabel lblFondo = new JLabel("New label");
-		lblFondo.setIcon(new ImageIcon("figura3.png"));
-		lblFondo.setBounds(0, 0, 436, 493);
+		JLabel lblFondo = new JLabel("");
+		lblFondo.setIcon(new ImageIcon("C:\\Users\\Josy\\Documents\\GitHub\\progra3_2048\\figura3.png"));
+		lblFondo.setBounds(0, 0, 588, 493);
 		getContentPane().add(lblFondo);
 
 
