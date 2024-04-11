@@ -1,5 +1,5 @@
 package interfaz;
-//prueba de cambios git
+
 import negocio.Juego;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,6 +25,10 @@ import javax.swing.border.MatteBorder;
 
 public class PantallaJuego extends JFrame implements KeyListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Juego juego = new Juego();
 	private JButton[][] botones;
 	private JPanel panelTablero;
@@ -85,7 +89,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	
 
 		// Puntaje
-		JLabel lblPuntaje = new JLabel("Puntaje: ");
+		JLabel lblPuntaje = new JLabel("Puntaje:   "+juego.obtenerPuntaje());
 		lblPuntaje.setForeground(new Color(210, 180, 140));
 		lblPuntaje.setFont(new Font("Segoe UI Black", Font.PLAIN, 18));
 		lblPuntaje.setBounds(10, 420, 131, 33);

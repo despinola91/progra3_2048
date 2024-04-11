@@ -162,7 +162,7 @@ public class Juego {
 	                }
 	                if (filaActual < size - 1 && this.matriz[filaActual + 1][columna] == this.matriz[filaActual][columna] && filaActual + 1 != indiceUltimaFichaCombinada) {
 	                    this.matriz[filaActual + 1][columna] *= 2;
-						this.incrementarPuntaje(this.matriz[filaActual - 1][columna]);
+						this.incrementarPuntaje(this.matriz[filaActual + 1][columna]);
 	                    this.matriz[filaActual][columna] = 0;
 	                    indiceUltimaFichaCombinada = filaActual + 1;
 	                    seMovio = true;
