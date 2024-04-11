@@ -33,7 +33,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	private Juego juego = new Juego();
 	private JButton[][] botones;
 	private JPanel panelTablero;
-	private JTextField textField;
+	private JTextField textPuntajeActual;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -65,8 +65,8 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 	
 		panelTablero = new JPanel();
-		panelTablero.setBackground(new Color(210, 180, 140));
-		panelTablero.setBounds(82, 83, 414, 337);
+		panelTablero.setBackground(new Color(176, 224, 230));
+		panelTablero.setBounds(88, 82, 414, 337);
 		getContentPane().add(panelTablero);
 		panelTablero.setLayout(new GridLayout(4,4));
 	
@@ -87,24 +87,24 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		lbl2048.setIcon(new ImageIcon("C:\\Users\\Josy\\Documents\\GitHub\\progra3_2048\\2048_log.png"));
 		lbl2048.setForeground(new Color(210, 180, 140));
 		lbl2048.setFont(new Font("Segoe UI Black", Font.PLAIN, 43));
-		lbl2048.setBounds(82, 15, 175, 48);
+		lbl2048.setBounds(56, 15, 175, 48);
 		getContentPane().add(lbl2048);
 	
 
 		// Puntaje
 		JLabel lblPuntaje = new JLabel("Puntaje:   ");
 		lblPuntaje.setForeground(Color.CYAN);
-		lblPuntaje.setFont(new Font("Segoe UI Black", Font.BOLD, 24));
-		lblPuntaje.setBounds(341, 30, 131, 33);
+		lblPuntaje.setFont(new Font("Segoe UI Black", Font.BOLD, 22));
+		lblPuntaje.setBounds(306, 31, 114, 33);
 		getContentPane().add(lblPuntaje);
 		
-		textField = new JTextField();
-		textField.setBackground(new Color(255, 248, 220));
-		textField.setForeground(SystemColor.textHighlight);
-		textField.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
-		textField.setBounds(455, 30, 125, 32);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textPuntajeActual = new JTextField();
+		textPuntajeActual.setBackground(new Color(255, 248, 220));
+		textPuntajeActual.setForeground(SystemColor.textHighlight);
+		textPuntajeActual.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
+		textPuntajeActual.setBounds(409, 33, 114, 32);
+		getContentPane().add(textPuntajeActual);
+		textPuntajeActual.setColumns(10);
 		
 		
 		
@@ -169,7 +169,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
         case 2048:
             return new Color(236, 99, 46); // Rojo más oscuro
         default:
-            return new Color(210, 180, 140); // Color marrón claro, como empieza
+            return new Color(130, 0, 130); // Color marrón claro, como empieza
 		}
 	}
 
