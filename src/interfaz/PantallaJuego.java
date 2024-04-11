@@ -84,7 +84,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 
 		// Título "2048"
 		JLabel lbl2048 = new JLabel("2048");
-		lbl2048.setIcon(new ImageIcon("C:\\Users\\Josy\\Documents\\GitHub\\progra3_2048\\2048_log.png"));
+		lbl2048.setIcon(new ImageIcon("2048_log.png"));
 		lbl2048.setForeground(new Color(210, 180, 140));
 		lbl2048.setFont(new Font("Segoe UI Black", Font.PLAIN, 43));
 		lbl2048.setBounds(56, 15, 175, 48);
@@ -108,7 +108,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		
 		//Fondo
 		JLabel lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon("C:\\Users\\Josy\\Documents\\GitHub\\progra3_2048\\figura3.png"));
+		lblFondo.setIcon(new ImageIcon("figura3.png"));
 		lblFondo.setBounds(0, 0, 588, 493);
 		getContentPane().add(lblFondo);
 
