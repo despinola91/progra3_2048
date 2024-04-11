@@ -92,7 +92,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	
 
 		// Puntaje
-		JLabel lblPuntaje = new JLabel("Puntaje:   ");
+		JLabel lblPuntaje = new JLabel("Puntaje:");
 		lblPuntaje.setForeground(Color.CYAN);
 		lblPuntaje.setFont(new Font("Segoe UI Black", Font.BOLD, 22));
 		lblPuntaje.setBounds(306, 31, 114, 33);
@@ -105,8 +105,6 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		textPuntajeActual.setBounds(409, 33, 114, 32);
 		getContentPane().add(textPuntajeActual);
 		textPuntajeActual.setColumns(10);
-		
-		
 		
 		//Fondo
 		JLabel lblFondo = new JLabel("");
@@ -146,7 +144,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	//cambia de color el fondo de la celda segùn el valor resultado de la suma
 	private Color cambiaColorCelda(int valor) {
 		switch (valor) {
-			case 2:
+		case 2:
             return new Color(209, 196, 177); // Marrón claro
         case 4:
             return new Color(237, 224, 200); // Naranja claro
@@ -169,7 +167,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
         case 2048:
             return new Color(236, 99, 46); // Rojo más oscuro
         default:
-            return new Color(130, 0, 130); // Color marrón claro, como empieza
+            return new Color(0, 250, 250); // celeste 
 		}
 	}
 
@@ -179,12 +177,18 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	    // Si el valor es mayor q 8 el color del texto será blanco, de lo contrario, será negro
 	    if (valor >= 8){
 	    	return Color.WHITE;
-    } else {
+	    } else {
         return Color.BLACK;
-    }
-	    		
+	    }
 	}
-
+	
+	//para actualizar el puntaje NO ESTA TERMINADO y VER SI SIRVE
+	private void actualizarPuntaje() {
+		 int puntaje=juego.obtenerPuntaje();
+		 textPuntajeActual = new JTextField(puntaje);
+		 
+	}
+	
 	//Verifica si el juego esta ganado o perdido
 	public void verificarEstadoJuego() {
         if (juego.juegoGanado()) {
