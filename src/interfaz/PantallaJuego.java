@@ -194,14 +194,14 @@ public class PantallaJuego extends JFrame implements KeyListener{
         if (juego.juegoGanado()) {
             JOptionPane.showMessageDialog(this, "JUEGO GANADO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
             juego.limpiarMatriz();
-            //juego.iniciarMatriz();
-			initialize();
+            juego.iniciarMatriz();
+			//initialize();
 			
         } else if (juego.juegoPerdido()) {
             JOptionPane.showMessageDialog(this, "JUEGO PERDIDO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
             juego.limpiarMatriz();
-            //juego.iniciarMatriz();
-			initialize();
+            juego.iniciarMatriz();
+			//initialize();
         }
     }
 
