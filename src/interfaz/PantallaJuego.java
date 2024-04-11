@@ -22,6 +22,7 @@ import java.awt.GridLayout;
 import java.awt.SystemColor;
 
 import javax.swing.border.MatteBorder;
+import javax.swing.JTextField;
 
 public class PantallaJuego extends JFrame implements KeyListener{
 	
@@ -32,6 +33,7 @@ public class PantallaJuego extends JFrame implements KeyListener{
 	private Juego juego = new Juego();
 	private JButton[][] botones;
 	private JPanel panelTablero;
+	private JTextField textField;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -95,6 +97,14 @@ public class PantallaJuego extends JFrame implements KeyListener{
 		lblPuntaje.setFont(new Font("Segoe UI Black", Font.BOLD, 24));
 		lblPuntaje.setBounds(341, 30, 131, 33);
 		getContentPane().add(lblPuntaje);
+		
+		textField = new JTextField();
+		textField.setBackground(new Color(255, 248, 220));
+		textField.setForeground(SystemColor.textHighlight);
+		textField.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
+		textField.setBounds(455, 30, 125, 32);
+		getContentPane().add(textField);
+		textField.setColumns(10);
 		
 		
 		
