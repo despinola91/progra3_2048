@@ -136,7 +136,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 
 			}
 		}
-
+		actualizarPuntaje();
 	}
 
 	// cambia de color el fondo de la celda segùn el valor resultado de la suma
@@ -183,8 +183,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	// para actualizar el puntaje NO ESTA TERMINADO y VER SI SIRVE
 	private void actualizarPuntaje() {
 		int puntaje = juego.obtenerPuntaje();
-		textPuntajeActual = new JTextField(puntaje);
-
+		textPuntajeActual.setText(String.valueOf(puntaje));
 	}
 
 	// Verifica si el juego esta ganado o perdido
