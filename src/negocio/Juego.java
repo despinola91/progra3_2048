@@ -335,4 +335,21 @@ public class Juego {
 		}
 		return false;
 	}
+	
+	public Posicion[] ObtenerJugadaRecomendada() {
+		int size = this.matriz.length;
+		
+		for (int fila = 0; fila < size; fila++) {
+			for(int columna = 0; columna < size; columna++) {
+				int CeldaArriba = (fila - 1)  < 0 ? null : this.matriz[fila-1][columna];
+				int CeldaAbajo = (fila + 1)  > this.matriz.length ? null : this.matriz[fila+1][columna];
+				int CeldaIzquierda = (columna - 1 < 0) ? null : this.matriz[fila][columna-1];
+				int CeldaDerecha = (columna + 1) > this.matriz.length ? null : this.matriz[fila][columna+1];
+				
+				if (valorCeldaArriba == null) {
+					
+				}
+			}
+		}
+	}
 }
