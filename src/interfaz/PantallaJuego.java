@@ -96,8 +96,9 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		getContentPane().add(lblPuntaje);
 
 		textPuntajeActual = new JTextField();
+		textPuntajeActual.setHorizontalAlignment(SwingConstants.CENTER);
 		textPuntajeActual.setBackground(new Color(255, 248, 220));
-		textPuntajeActual.setForeground(SystemColor.textHighlight);
+		textPuntajeActual.setForeground(new Color(153, 50, 204));
 		textPuntajeActual.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
 		textPuntajeActual.setBounds(409, 33, 114, 32);
 		getContentPane().add(textPuntajeActual);
