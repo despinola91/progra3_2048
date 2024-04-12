@@ -16,4 +16,16 @@ public class Posicion {
     public int obtenerColumna() {
         return columna;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Posicion otraPosicion = (Posicion) obj;
+        return fila == otraPosicion.fila && columna == otraPosicion.columna;
+    }
 }
