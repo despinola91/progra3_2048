@@ -129,4 +129,43 @@ class JuegoTest {
         assertArrayEquals(new int[]{0,2,4,8}, estadoMatriz[2]);
         assertArrayEquals(new int[]{0,2,4,8}, estadoMatriz[3]);
     }
+    
+    @Test
+    void obtenerPosicionesJugadaRecomendada() {
+        juego.definirMatriz(new int[][] {
+            {0, 0, 0, 0},
+            {0, 4, 0, 8},
+            {2, 4, 0, 8},
+            {2, 4, 0, 8}
+        });
+
+        Posicion[] posicionesJugadaRecomendada = juego.obtenerPosicionesJugadaRecomendada();
+        Posicion posicionJugadaRecomendadaEsperada = new Posicion(1, 1);
+
+        // Verifico si la posicion buscada está dentro del array 
+        boolean posicionEncontrada = false;
+        for (Posicion posicionJugada : posicionesJugadaRecomendada) {
+            if (posicionJugada.equals(posicionJugadaRecomendadaEsperada)) {
+                posicionEncontrada = true;
+            }
+        }
+        
+        // Caso Null
+        juego.definirMatriz(new int[][] {
+            {0, 0, 0, 0},
+            {0, 0, 0, 8},
+            {0, 4, 0, 0},
+            {2, 0, 0, 8}
+        });
+
+        posicionesJugadaRecomendada = juego.obtenerPosicionesJugadaRecomendada();
+
+        // Verifico si la posicion buscada está dentro del array 
+        boolean posicionNoEncontrada = posicionesJugadaRecomendada == null;
+        
+        
+        assertTrue(posicionEncontrada, "La posición esperada no está en las posiciones recomendadas");
+        assertTrue(posicionNoEncontrada, "No deberían existir jugadas recomendadas");
+    }
+
 }

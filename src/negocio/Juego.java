@@ -336,20 +336,35 @@ public class Juego {
 		return false;
 	}
 	
-	public Posicion[] ObtenerJugadaRecomendada() {
+	/**
+	 * Obtiene las posiciones de una jugada recomendada. Puede no existir una jugada recomendada hasta aparecer un nuevo numero.
+	 * @return Array con posiciones en matriz de jugada recomendada. Puede ser NULL
+	 */
+	public Posicion[] obtenerPosicionesJugadaRecomendada() {
 		int size = this.matriz.length;
 		
 		for (int fila = 0; fila < size; fila++) {
 			for(int columna = 0; columna < size; columna++) {
-				int CeldaArriba = (fila - 1)  < 0 ? null : this.matriz[fila-1][columna];
-				int CeldaAbajo = (fila + 1)  > this.matriz.length ? null : this.matriz[fila+1][columna];
-				int CeldaIzquierda = (columna - 1 < 0) ? null : this.matriz[fila][columna-1];
-				int CeldaDerecha = (columna + 1) > this.matriz.length ? null : this.matriz[fila][columna+1];
+				Celda CeldaArriba = (fila - 1)  < 0 ? null : new Celda(this.matriz[fila-1][columna], fila-1, columna);
+				Celda CeldaAbajo = (fila + 1)  > this.matriz.length-1 ? null : new Celda(this.matriz[fila+1][columna], fila+1, columna);
+				Celda CeldaIzquierda = (columna - 1 < 0) ? null : new Celda(this.matriz[fila][columna-1], fila, columna-1);
+				Celda CeldaDerecha = (columna + 1) > this.matriz.length-1 ? null : new Celda(this.matriz[fila][columna+1], fila, columna+1);
 				
-				if (valorCeldaArriba == null) {
-					
+				Celda[] CeldasProximas = {CeldaArriba, CeldaAbajo, CeldaIzquierda, CeldaDerecha};
+				
+				for(Celda celda : CeldasProximas) {
+					if(celda != null) {
+						int valorCelda = celda.getValor();
+						
+						if(valorCelda == this.matriz[fila][columna] && valorCelda != 0) {
+							Posicion[] arrayPosicionesJugadaRecomendada = new Posicion[] {new Posicion(fila, columna), celda.getPosicion()};
+							return arrayPosicionesJugadaRecomendada;
+						}
+					}
 				}
 			}
 		}
+		
+		return null;
 	}
 }
