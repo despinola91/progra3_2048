@@ -55,6 +55,16 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	public PantallaJuego() {
 		initialize();
 		setResizable(false); // Para que no se redimencione el alto y ancho
+
+		//Se agrega panel protector para que los eventos de click no intervengan en el enfoque
+		JPanel glassPane = (JPanel) this.getGlassPane();
+		glassPane.setVisible(true); 
+		glassPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Si se hace click no hace nada
+			}
+		});
 	}
 
 	private void initialize() {
