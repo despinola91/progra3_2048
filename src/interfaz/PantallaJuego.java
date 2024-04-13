@@ -74,14 +74,6 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		getContentPane().add(panelTablero);
 		panelTablero.setLayout(new GridLayout(4, 4));
 		
-	    // Mantiene el foco siempre en panelTablero
-	    panelTablero.addFocusListener(new FocusAdapter() {
-	        @Override
-	        public void focusLost(FocusEvent e) {
-	            panelTablero.requestFocusInWindow(); // Solicitar el foco nuevamente si se pierde
-	        }
-	    });
-		
 
 		// Crea y posiciona los botones del tablero 4x4
 		botones = new JButton[4][4];
@@ -91,7 +83,6 @@ public class PantallaJuego extends JFrame implements KeyListener {
 				botones[fila][columna].setBackground(new Color(210, 180, 140));
 				botones[fila][columna].setFont(new Font("Segoe UI Black", Font.PLAIN, 24));
 				panelTablero.add(botones[fila][columna]);
-				//botones[fila][columna].setEnabled(false); // Deshabilita boton
 			}
 		}
 
