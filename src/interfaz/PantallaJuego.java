@@ -50,6 +50,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 
 	public PantallaJuego() {
 		initialize();
+		setResizable(false); // Para que no se redimencione el alto y ancho
 	}
 
 	private void initialize() {
@@ -113,6 +114,9 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		addKeyListener(this); // escucha eventos de teclado
 		setFocusable(true); // recibe los eventos, la ventana es el foco
 		setFocusTraversalKeysEnabled(false); // desactiva teclas que me puedan cambiar que el foco de la ventana
+		
+		// Agregar un FocusListener para mantener el foco en la ventana del juego
+		 // Agregar un FocusListener para mantener el foco en la ventana del juego
 
 		actualizarTablero();
 
