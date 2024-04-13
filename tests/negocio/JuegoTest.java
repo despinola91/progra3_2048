@@ -227,19 +227,28 @@ class JuegoTest {
     void juegoPerdido() {
 
         juego.definirMatriz( new int[][]{
-            {1, 1, 1, 1},
-            {1, 1, 1, 1},
-            {1, 1, 1, 1},
-            {1, 1, 1, 1}
+            {2, 4, 2, 4},
+            {4, 2, 4, 2},
+            {2, 4, 2, 4},
+            {4, 2, 4, 2}
         });
 
         assertTrue(juego.juegoPerdido() == true);
 
         juego.definirMatriz( new int[][]{
-            {1, 1, 1, 1},
-            {1, 1, 1, 1},
-            {1, 1, 1, 1},
-            {1, 1, 1, 0}
+            {2, 4, 2, 4},
+            {4, 2, 4, 2},
+            {2, 4, 2, 4},
+            {4, 2, 4, 0}
+        });
+
+        assertTrue(juego.juegoPerdido() == false);
+
+        juego.definirMatriz( new int[][]{
+            {2, 4, 2, 4},
+            {4, 2, 4, 2},
+            {2, 4, 2, 4},
+            {4, 2, 4, 4}
         });
 
         assertTrue(juego.juegoPerdido() == false);

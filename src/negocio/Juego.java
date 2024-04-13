@@ -336,9 +336,32 @@ public class Juego {
 	 */
 	public boolean juegoPerdido() {
 		
-		//No se ganó el juego y además ya no hay lugares disponibles.
-		return ( this.juegoGanado() == false && obtenerPosicionRandomDisponible() == null);
-		
+		//Se buscan posibles combinaciones por realizar
+		for (int fila = 0; fila < matriz.length; fila++) {
+			for (int columna = 0; columna < matriz[0].length; columna++) {
+				
+				//Verifica si se pueden conbinar celdas en las 4 direcciones
+				if (fila > 0 && matriz[fila][columna] == matriz[fila - 1][columna]) {
+					return false;
+				}
+				if (fila < matriz.length - 1 && matriz[fila][columna] == matriz[fila + 1][columna]) {
+					return false;
+				}
+				if (columna > 0 && matriz[fila][columna] == matriz[fila][columna - 1]) {
+					return false;
+				}
+				if (columna < matriz[0].length - 1 && matriz[fila][columna] == matriz[fila][columna + 1]) {
+					return false;
+				}
+			}
+		}
+
+		//No hay combinaciones, no se ganó el juego y además ya no hay lugares disponibles.
+		if (this.juegoGanado() == false && obtenerPosicionRandomDisponible() == null) {
+			return true;
+		}
+
+		return false;
 	}
 	
 	/**
