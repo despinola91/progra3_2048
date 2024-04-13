@@ -17,7 +17,7 @@ class JuegoTest {
     }
 
     @Test
-    void obtenerValorRandomTest() {
+    void obtenerValorRandom() {
         assertThat(juego.obtenerValorRandom(), anyOf(equalTo(2), equalTo(4)));
     }
     
@@ -52,6 +52,16 @@ class JuegoTest {
         
         posicion = juego.obtenerPosicionRandomDisponible(); 
         assertTrue(posicion.obtenerFila() == 3 && posicion.obtenerColumna() == 2);
+
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        });
+        
+        posicion = juego.obtenerPosicionRandomDisponible(); 
+        assertTrue(posicion == null);
     }
     
     @Test
@@ -182,4 +192,58 @@ class JuegoTest {
         assertTrue(posicionNoEncontrada, "No deberían existir jugadas recomendadas");
     }
 
+    @Test
+    void juegoGanado() {
+
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, 2048, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        });
+
+        assertTrue(juego.juegoGanado() == true);
+        
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, -2048, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        });
+
+        assertTrue(juego.juegoGanado() == false);
+
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, 0, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        });
+
+        assertTrue(juego.juegoGanado() == false);
+    }
+
+    @Test
+    void juegoPerdido() {
+
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        });
+
+        assertTrue(juego.juegoPerdido() == true);
+
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 0}
+        });
+
+        assertTrue(juego.juegoPerdido() == false);
+        
+    }
 }
+    
