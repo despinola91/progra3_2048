@@ -33,6 +33,7 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.UIManager;
 
 
 public class PantallaJuego extends JFrame implements KeyListener {
@@ -217,7 +218,6 @@ public class PantallaJuego extends JFrame implements KeyListener {
 
 			}
 		}
-		actualizarPosicionesRecomendadas();
 		actualizarPuntaje();
 	}
 	
@@ -235,8 +235,8 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	        botones[fila1][columna1].setBackground(Color.YELLOW);
 	        botones[fila2][columna2].setBackground(Color.YELLOW);
 	    } else {
-	        lblCoordenada1.setText("");
-	        lblCoordenada2.setText("");
+	    	 lblCoordenada1.setText("");
+	         lblCoordenada2.setText(""); 
 	    }
 	}
 
@@ -316,7 +316,8 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 	    // Reinicia el temporizador en cada movimiento
-	    timer.restart();
+		timer.stop();
+	    timer.start();
 
 	    // Captura eventos de teclas
 	    int keyCode = e.getKeyCode();
