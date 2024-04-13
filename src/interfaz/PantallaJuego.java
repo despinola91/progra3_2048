@@ -30,6 +30,11 @@ import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
 import javax.swing.JTextField;
 
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
 public class PantallaJuego extends JFrame implements KeyListener {
 
 	/**
@@ -46,6 +51,9 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	private JLabel lblCoordenada1;
 	private JLabel lblCoordenada2;
 	private JLabel lblJugadaRecomendada;
+	
+	private Timer timer;
+    private static final int DELAY = 10000; // 10 segundos
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -73,6 +81,16 @@ public class PantallaJuego extends JFrame implements KeyListener {
 				// Si se hace click no hace nada
 			}
 		});
+		
+	    // Crea el temporizador
+	    timer = new Timer(DELAY, new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            // Actualiza las posiciones recomendadas
+	            actualizarPosicionesRecomendadas();
+	        }
+	    });
+	    timer.start(); // Inicia el temporizador
 	}
 
 	private void initialize() {
@@ -297,23 +315,27 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	// Nexo entre logica e interfaz
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		switch (keyCode) {
-			case KeyEvent.VK_UP:
-				juego.moverArriba();
-				break;
-			case KeyEvent.VK_DOWN:
-				juego.moverAbajo();
-				break;
-			case KeyEvent.VK_LEFT:
-				juego.moverIzquierda();
-				break;
-			case KeyEvent.VK_RIGHT:
-				juego.moverDerecha();
-				break;
-		}
-		actualizarTablero();
-		verificarEstadoJuego();
+	    // Reinicia el temporizador en cada movimiento
+	    timer.restart();
+
+	    // Captura eventos de teclas
+	    int keyCode = e.getKeyCode();
+	    switch (keyCode) {
+	        case KeyEvent.VK_UP:
+	            juego.moverArriba();
+	            break;
+	        case KeyEvent.VK_DOWN:
+	            juego.moverAbajo();
+	            break;
+	        case KeyEvent.VK_LEFT:
+	            juego.moverIzquierda();
+	            break;
+	        case KeyEvent.VK_RIGHT:
+	            juego.moverDerecha();
+	            break;
+	    }
+	    actualizarTablero();
+	    verificarEstadoJuego();
 	}
 
 	@Override
