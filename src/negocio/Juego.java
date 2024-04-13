@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class Juego {
 	
-	//Propiedades
 	private int [][] matriz = new int[4][4];
 	private int puntaje;
 	
@@ -13,8 +12,7 @@ public class Juego {
 		this.puntaje = 0;
 	};
 	
-	//Métodos disponibles para la interfaz
-	
+
 	/**
 	 * Inicializa la matriz completando 2 posiciones random con 2 o 4.
 	 */
@@ -70,8 +68,12 @@ public class Juego {
 				}
 			}
 		}
-		
-		return obtenerPosicionRandom(posicionesDisponibles);
+		if (posicionesDisponibles.size() == 0) {
+			return null;
+		}
+		else {
+			return obtenerPosicionRandom(posicionesDisponibles);
+		}
 	};
 
 	/**
@@ -271,11 +273,14 @@ public class Juego {
 		return this.puntaje;
 	}
 
+	/**
+	 * Incrementa el valor del puntaje actual sumando el puntaje enviado.
+	 * @param puntaje
+	 */
 	public void incrementarPuntaje(int puntaje) {
 		this.puntaje += puntaje;
 	}
 	
-	//Métodos internos
 	/**
 	 * Metodo privado, agrega una nueva ficha en algun espacio random que este disponible y con el valor 2
 	 * @return void
@@ -312,7 +317,10 @@ public class Juego {
         return list.get(randomIndex);
 	}
 
-	// GANA JUEGO: si encuentra alguna celda con valor 2048
+	/**
+	 * Indica si el juego esta ganado.
+	 * @return
+	 */
 	public boolean juegoGanado() {
 		for (int[] fila : matriz) {
 			for (int valor : fila) {
@@ -324,37 +332,43 @@ public class Juego {
 		return false;
 	}
 
-	//PIERDE JUEGO: si no hay movimientos disponibles en ninguna direccion
+	/**
+	 * Indica si el juego está perdido.
+	 * @return
+	 */
 	public boolean juegoPerdido() {
-		return !hayMovimientosDisponibles();
-	}
-	
-	// Verifica si aun hay movimientos disponibles
-	private boolean hayMovimientosDisponibles() {
+		
+		//Se buscan posibles combinaciones por realizar
 		for (int fila = 0; fila < matriz.length; fila++) {
 			for (int columna = 0; columna < matriz[0].length; columna++) {
-				// Verifica si hay alguna celda vacia
-				if (matriz[fila][columna] == 0) {
-					return true;
-				}
+				
 				//Verifica si se pueden conbinar celdas en las 4 direcciones
 				if (fila > 0 && matriz[fila][columna] == matriz[fila - 1][columna]) {
-					return true;
+					return false;
 				}
 				if (fila < matriz.length - 1 && matriz[fila][columna] == matriz[fila + 1][columna]) {
-					return true;
+					return false;
 				}
 				if (columna > 0 && matriz[fila][columna] == matriz[fila][columna - 1]) {
-					return true;
+					return false;
 				}
 				if (columna < matriz[0].length - 1 && matriz[fila][columna] == matriz[fila][columna + 1]) {
-					return true;
+					return false;
 				}
 			}
 		}
+
+		//No hay combinaciones, no se ganó el juego y además ya no hay lugares disponibles.
+		if (this.juegoGanado() == false && obtenerPosicionRandomDisponible() == null) {
+			return true;
+		}
+
 		return false;
 	}
-
+	
+	/**
+	 * Limpia la matriz dejando todas las casillas en 0.
+	 */
 	public void limpiarMatriz() {
 		for (int fila = 0; fila < matriz.length; fila++) {
 			for (int columna = 0; columna < matriz[0].length; columna++) {
@@ -362,5 +376,37 @@ public class Juego {
 					matriz[fila][columna] = 0;
 			}
 		}
+	}
+	
+	/**
+	 * Obtiene las posiciones de una jugada recomendada. Puede no existir una jugada recomendada hasta aparecer un nuevo numero.
+	 * @return Array con posiciones en matriz de jugada recomendada. Puede ser NULL
+	 */
+	public Posicion[] obtenerPosicionesJugadaRecomendada() {
+		int size = this.matriz.length;
+		
+		for (int fila = 0; fila < size; fila++) {
+			for(int columna = 0; columna < size; columna++) {
+				Celda CeldaArriba = (fila - 1)  < 0 ? null : new Celda(this.matriz[fila-1][columna], fila-1, columna);
+				Celda CeldaAbajo = (fila + 1)  > this.matriz.length-1 ? null : new Celda(this.matriz[fila+1][columna], fila+1, columna);
+				Celda CeldaIzquierda = (columna - 1 < 0) ? null : new Celda(this.matriz[fila][columna-1], fila, columna-1);
+				Celda CeldaDerecha = (columna + 1) > this.matriz.length-1 ? null : new Celda(this.matriz[fila][columna+1], fila, columna+1);
+				
+				Celda[] CeldasProximas = {CeldaArriba, CeldaAbajo, CeldaIzquierda, CeldaDerecha};
+				
+				for(Celda celda : CeldasProximas) {
+					if(celda != null) {
+						int valorCelda = celda.getValor();
+						
+						if(valorCelda == this.matriz[fila][columna] && valorCelda != 0) {
+							Posicion[] arrayPosicionesJugadaRecomendada = new Posicion[] {new Posicion(fila, columna), celda.getPosicion()};
+							return arrayPosicionesJugadaRecomendada;
+						}
+					}
+				}
+			}
+		}
+		
+		return null;
 	}
 }

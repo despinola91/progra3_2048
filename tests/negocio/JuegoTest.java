@@ -17,7 +17,7 @@ class JuegoTest {
     }
 
     @Test
-    void obtenerValorRandomTest() {
+    void obtenerValorRandom() {
         assertThat(juego.obtenerValorRandom(), anyOf(equalTo(2), equalTo(4)));
     }
     
@@ -52,6 +52,16 @@ class JuegoTest {
         
         posicion = juego.obtenerPosicionRandomDisponible(); 
         assertTrue(posicion.obtenerFila() == 3 && posicion.obtenerColumna() == 2);
+
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        });
+        
+        posicion = juego.obtenerPosicionRandomDisponible(); 
+        assertTrue(posicion == null);
     }
     
     @Test
@@ -143,4 +153,106 @@ class JuegoTest {
 
         assertEquals(16, juego.obtenerPuntaje());
     }
+    
+    @Test
+    void obtenerPosicionesJugadaRecomendada() {
+        juego.definirMatriz(new int[][] {
+            {0, 0, 0, 0},
+            {0, 4, 0, 8},
+            {2, 4, 0, 8},
+            {2, 4, 0, 8}
+        });
+
+        Posicion[] posicionesJugadaRecomendada = juego.obtenerPosicionesJugadaRecomendada();
+        Posicion posicionJugadaRecomendadaEsperada = new Posicion(1, 1);
+
+        // Verifico si la posicion buscada está dentro del array 
+        boolean posicionEncontrada = false;
+        for (Posicion posicionJugada : posicionesJugadaRecomendada) {
+            if (posicionJugada.equals(posicionJugadaRecomendadaEsperada)) {
+                posicionEncontrada = true;
+            }
+        }
+        
+        // Caso Null
+        juego.definirMatriz(new int[][] {
+            {0, 0, 0, 0},
+            {0, 0, 0, 8},
+            {0, 4, 0, 0},
+            {2, 0, 0, 8}
+        });
+
+        posicionesJugadaRecomendada = juego.obtenerPosicionesJugadaRecomendada();
+
+        // Verifico si la posicion buscada está dentro del array 
+        boolean posicionNoEncontrada = posicionesJugadaRecomendada == null;
+        
+        
+        assertTrue(posicionEncontrada, "La posición esperada no está en las posiciones recomendadas");
+        assertTrue(posicionNoEncontrada, "No deberían existir jugadas recomendadas");
+    }
+
+    @Test
+    void juegoGanado() {
+
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, 2048, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        });
+
+        assertTrue(juego.juegoGanado() == true);
+        
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, -2048, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        });
+
+        assertTrue(juego.juegoGanado() == false);
+
+        juego.definirMatriz( new int[][]{
+            {1, 1, 1, 1},
+            {1, 1, 0, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        });
+
+        assertTrue(juego.juegoGanado() == false);
+    }
+
+    @Test
+    void juegoPerdido() {
+
+        juego.definirMatriz( new int[][]{
+            {2, 4, 2, 4},
+            {4, 2, 4, 2},
+            {2, 4, 2, 4},
+            {4, 2, 4, 2}
+        });
+
+        assertTrue(juego.juegoPerdido() == true);
+
+        juego.definirMatriz( new int[][]{
+            {2, 4, 2, 4},
+            {4, 2, 4, 2},
+            {2, 4, 2, 4},
+            {4, 2, 4, 0}
+        });
+
+        assertTrue(juego.juegoPerdido() == false);
+
+        juego.definirMatriz( new int[][]{
+            {2, 4, 2, 4},
+            {4, 2, 4, 2},
+            {2, 4, 2, 4},
+            {4, 2, 4, 4}
+        });
+
+        assertTrue(juego.juegoPerdido() == false);
+        
+    }
 }
+    
