@@ -54,7 +54,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	private JLabel lblJugadaRecomendada;
 	
 	private Timer timer;
-    private static final int DELAY = 10000; // 10 segundos
+    private static final int DELAY = 7000; //aprox 10seg
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -235,9 +235,15 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	        botones[fila1][columna1].setBackground(Color.YELLOW);
 	        botones[fila2][columna2].setBackground(Color.YELLOW);
 	    } else {
-	    	 lblCoordenada1.setText("");
-	         lblCoordenada2.setText(""); 
+	    	limpiarCoordenadas();
 	    }
+	}
+	/*Se lo saca afuera al metodo ya que las coordenadas tardaban 10 segundos en limpiarse de la pantalla
+	 habiendo movido alguna tecla incluso. Asique se llama a este metodo despues de haber movido una tecla
+	 */
+	private void limpiarCoordenadas() {
+	    lblCoordenada1.setText("");
+	    lblCoordenada2.setText("");
 	}
 
 	// cambia de color el fondo de la celda segùn el valor resultado de la suma
@@ -306,6 +312,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		pantallaInicial.getFrame().setVisible(true); // Hace visible la ventana PantallaInicial
 		this.dispose(); // Cerrar la ventana actual
 	}
+	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -316,8 +323,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 	    // Reinicia el temporizador en cada movimiento
-		timer.stop();
-	    timer.start();
+		timer.restart();
 
 	    // Captura eventos de teclas
 	    int keyCode = e.getKeyCode();
@@ -335,8 +341,10 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	            juego.moverDerecha();
 	            break;
 	    }
+	    limpiarCoordenadas(); // Limpia las coordenadas después de mover la tecla
 	    actualizarTablero();
 	    verificarEstadoJuego();
+	    
 	}
 
 	@Override
