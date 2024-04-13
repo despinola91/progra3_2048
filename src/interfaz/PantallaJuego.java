@@ -1,6 +1,8 @@
 package interfaz;
 
 import negocio.Juego;
+import negocio.Posicion;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -38,6 +40,12 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	private JButton[][] botones;
 	private JPanel panelTablero;
 	private JTextField textPuntajeActual;
+	
+	private JLabel lblPosicion1;
+	private JLabel lblPosicion2;
+	private JLabel lblCoordenada1;
+	private JLabel lblCoordenada2;
+	private JLabel lblJugadaRecomendada;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -120,12 +128,48 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		textPuntajeActual.setBounds(409, 33, 114, 32);
 		getContentPane().add(textPuntajeActual);
 		textPuntajeActual.setColumns(10);
+		
+		//Jugada recomendada
+		lblJugadaRecomendada = new JLabel("Jugada Recomendada: ");
+		lblJugadaRecomendada.setForeground(Color.CYAN);
+		lblJugadaRecomendada.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblJugadaRecomendada.setBounds(141, 448, 167, 14);
+		getContentPane().add(lblJugadaRecomendada);
+		
+		lblPosicion1 = new JLabel("Posicion 1 = ");
+		lblPosicion1.setForeground(Color.CYAN);
+		lblPosicion1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblPosicion1.setBounds(340, 430, 100, 20);
+		getContentPane().add(lblPosicion1);
+
+		lblCoordenada1 = new JLabel();
+		lblCoordenada1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblCoordenada1.setForeground(Color.CYAN);
+		lblCoordenada1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCoordenada1.setBackground(SystemColor.menu);
+		lblCoordenada1.setBounds(418, 430, 50, 18);
+		getContentPane().add(lblCoordenada1);
+
+		lblPosicion2 = new JLabel("Posicion 2 = ");
+		lblPosicion2.setForeground(Color.CYAN);
+		lblPosicion2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblPosicion2.setBounds(340, 458, 100, 20);
+		getContentPane().add(lblPosicion2);
+
+		lblCoordenada2 = new JLabel();
+		lblCoordenada2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblCoordenada2.setForeground(Color.CYAN);
+		lblCoordenada2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCoordenada2.setBackground(SystemColor.menu);
+		lblCoordenada2.setBounds(418, 460, 50, 18);
+		getContentPane().add(lblCoordenada2);
 
 		// Fondo
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon("figura3.png"));
 		lblFondo.setBounds(0, 0, 588, 493);
 		getContentPane().add(lblFondo);
+		
 
 		addKeyListener(this); // escucha eventos de teclado
 		setFocusable(true); // recibe los eventos, la ventana es el foco
@@ -146,7 +190,6 @@ public class PantallaJuego extends JFrame implements KeyListener {
 				int valor = matriz[fila][columna];
 				botones[fila][columna].setText(valor == 0 ? "" : String.valueOf(valor)); // muestra el nro unicamente si
 																							// es distinto de 0
-
 				// Cambiar el color según el valor usando el metodo cambiaColorCelda
 				botones[fila][columna].setBackground(cambiaColorCelda(valor));
 
@@ -156,7 +199,27 @@ public class PantallaJuego extends JFrame implements KeyListener {
 
 			}
 		}
+		actualizarPosicionesRecomendadas();
 		actualizarPuntaje();
+	}
+	
+	// Actualiza las posiciones recomendadas y resalta las celdas en tablero
+	private void actualizarPosicionesRecomendadas() {
+	    Posicion[] posiciones = juego.obtenerPosicionesJugadaRecomendada();
+	    if (posiciones != null && posiciones.length == 2) {
+	        lblCoordenada1.setText("(" + posiciones[0].obtenerFila() + "," + posiciones[0].obtenerColumna() + ")");
+	        lblCoordenada2.setText("(" + posiciones[1].obtenerFila() + "," + posiciones[1].obtenerColumna() + ")");
+
+	        int fila1 = posiciones[0].obtenerFila();
+	        int columna1 = posiciones[0].obtenerColumna();
+	        int fila2 = posiciones[1].obtenerFila();
+	        int columna2 = posiciones[1].obtenerColumna();
+	        botones[fila1][columna1].setBackground(Color.YELLOW);
+	        botones[fila2][columna2].setBackground(Color.YELLOW);
+	    } else {
+	        lblCoordenada1.setText("");
+	        lblCoordenada2.setText("");
+	    }
 	}
 
 	// cambia de color el fondo de la celda segùn el valor resultado de la suma
