@@ -162,7 +162,7 @@ public class Juego {
 	                }
 	                if (filaActual < size - 1 && this.matriz[filaActual + 1][columna] == this.matriz[filaActual][columna] && filaActual + 1 != indiceUltimaFichaCombinada) {
 	                    this.matriz[filaActual + 1][columna] *= 2;
-						this.incrementarPuntaje(this.matriz[filaActual - 1][columna]);
+						this.incrementarPuntaje(this.matriz[filaActual + 1][columna]);
 	                    this.matriz[filaActual][columna] = 0;
 	                    indiceUltimaFichaCombinada = filaActual + 1;
 	                    seMovio = true;
@@ -351,6 +351,15 @@ public class Juego {
 			}
 		}
 		return false;
+	}
+
+	public void limpiarMatriz() {
+		for (int fila = 0; fila < matriz.length; fila++) {
+			for (int columna = 0; columna < matriz[0].length; columna++) {
+		
+					matriz[fila][columna] = 0;
+			}
+		}
 	}
 	
 	/**

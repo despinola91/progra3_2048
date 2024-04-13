@@ -1,5 +1,6 @@
 
 package interfaz;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,7 +44,6 @@ public class PantallaInicial {
 	public PantallaInicial() {
 		initialize();
 
-
 	}
 
 	/**
@@ -51,14 +51,15 @@ public class PantallaInicial {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("2048"); //Titulo de la ventana
-	//	frame.setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaInicial.class.getResource("/game_2048/2048icon.png"))); //Icono
+		frame.setTitle("2048"); // Titulo de la ventana
+		// frame.setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaInicial.class.getResource("/game_2048/2048icon.png")));
+		// //Icono
 		frame.getContentPane().setBackground(new Color(210, 180, 140));
 		frame.setBounds(300, 20, 451, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JLabel lbl2048 = new JLabel("2048"); //Titulo de juego en medio de la pantalla
+		JLabel lbl2048 = new JLabel("2048"); // Titulo de juego en medio de la pantalla
 		lbl2048.setForeground(new Color(255, 255, 255));
 		lbl2048.setFont(new Font("Segoe UI Black", Font.PLAIN, 82));
 		lbl2048.setBounds(120, 28, 244, 187);
@@ -74,13 +75,13 @@ public class PantallaInicial {
 		botonPlay.setFont(new Font("Segoe UI Black", Font.PLAIN, 40));
 		botonPlay.setBounds(139, 200, 150, 65);
 		frame.getContentPane().add(botonPlay);
-		
-		botonPlay.setBackground(new Color(192,224,255));
+
+		botonPlay.setBackground(new Color(192, 224, 255));
 		// llamar a revalidate() y repaint() sino no cambia el color de fondo...
 		botonPlay.revalidate();
 		botonPlay.repaint();
-		
-		//agregamos la figura de fondo
+
+		// agregamos la figura de fondo
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setForeground(SystemColor.controlHighlight);
 		lblFondo.setIcon(new ImageIcon("fondo1.png"));
@@ -88,11 +89,19 @@ public class PantallaInicial {
 		frame.getContentPane().add(lblFondo);
 
 	}
-	protected void mostrarPantallaJuego() { //Crea la nueva ventana, la hace visible y cierra la primera
+
+	protected void mostrarPantallaJuego() { // Crea la nueva ventana, la hace visible y cierra la primera
 		PantallaJuego frame2 = new PantallaJuego();
 		frame2.setVisible(true);
 		frame.dispose();
 	}
-	
-	
+
+	/*
+	 * Necesario tener el jFrame de pantallaInical para poder volver a esta pantalla
+	 * cuando se cierre la PantallaJuego, ya que se borran todas las referencias
+	 */
+	public JFrame getFrame() {
+		return frame;
+	}
+
 }
