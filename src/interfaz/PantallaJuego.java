@@ -76,7 +76,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 			for (int columna = 0; columna < 4; columna++) {
 				botones[fila][columna] = new JButton();
 				botones[fila][columna].setBackground(new Color(210, 180, 140));
-				botones[fila][columna].setFont(new Font("Segoe UI Black", Font.PLAIN, 29));
+				botones[fila][columna].setFont(new Font("Segoe UI Black", Font.PLAIN, 24));
 				panelTablero.add(botones[fila][columna]);
 			}
 		}
