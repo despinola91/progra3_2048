@@ -5,8 +5,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -69,6 +73,15 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		panelTablero.setBounds(88, 82, 414, 337);
 		getContentPane().add(panelTablero);
 		panelTablero.setLayout(new GridLayout(4, 4));
+		
+	    // Mantiene el foco siempre en panelTablero
+	    panelTablero.addFocusListener(new FocusAdapter() {
+	        @Override
+	        public void focusLost(FocusEvent e) {
+	            panelTablero.requestFocusInWindow(); // Solicitar el foco nuevamente si se pierde
+	        }
+	    });
+		
 
 		// Crea y posiciona los botones del tablero 4x4
 		botones = new JButton[4][4];
@@ -78,6 +91,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 				botones[fila][columna].setBackground(new Color(210, 180, 140));
 				botones[fila][columna].setFont(new Font("Segoe UI Black", Font.PLAIN, 24));
 				panelTablero.add(botones[fila][columna]);
+				//botones[fila][columna].setEnabled(false); // Deshabilita boton
 			}
 		}
 
@@ -97,6 +111,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		getContentPane().add(lblPuntaje);
 
 		textPuntajeActual = new JTextField();
+		textPuntajeActual.setEditable(false);
 		textPuntajeActual.setHorizontalAlignment(SwingConstants.CENTER);
 		textPuntajeActual.setBackground(new Color(255, 248, 220));
 		textPuntajeActual.setForeground(new Color(153, 50, 204));
@@ -115,8 +130,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		setFocusable(true); // recibe los eventos, la ventana es el foco
 		setFocusTraversalKeysEnabled(false); // desactiva teclas que me puedan cambiar que el foco de la ventana
 		
-		// Agregar un FocusListener para mantener el foco en la ventana del juego
-		 // Agregar un FocusListener para mantener el foco en la ventana del juego
+
 
 		actualizarTablero();
 
