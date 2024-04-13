@@ -1,8 +1,8 @@
 package negocio;
 
 public class Celda {
-	Posicion posicion;
-	int valor;
+	private Posicion posicion;
+	private int valor;
 	
 	Celda(int valor, int fila, int columna) {
 		this.valor = valor;
@@ -21,7 +21,7 @@ public class Celda {
 		return this.valor;
 	}
 	
-	public int setValor(int valor) {
+	public void setValor(int valor) {
 		this.valor = valor;
 	}
 }
