@@ -24,6 +24,11 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.AudioInputStream;
+
+import java.io.File;
 
 
 public class PantallaJuego extends JFrame implements KeyListener {
@@ -298,6 +303,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	            juego.moverDerecha();
 	            break;
 	    }
+	    reproducirSonido("movimiento.wav");
 	    limpiarTextoJugadaRecomendada();
 	    actualizarTablero();
 	    verificarEstadoJuego();
@@ -307,5 +313,25 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// ...
+	}
+	
+	//SONIDO
+	private void reproducirSonido(String rutaArchivo) {
+	    try {
+	        // Obtener el archivo de sonido
+	        File archivoSonido = new File(rutaArchivo);
+
+	        // Crear un clip de sonido
+	        Clip clip = AudioSystem.getClip();
+	        
+	        // Cargar el archivo de sonido en el clip
+	        AudioInputStream inputStream = AudioSystem.getAudioInputStream(archivoSonido);
+	        clip.open(inputStream);
+	        
+	        // Reproducir el sonido
+	        clip.start();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 }
