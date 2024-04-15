@@ -377,8 +377,8 @@ public class Juego {
 	}
 	
 	/**
-	 * Obtiene las posiciones (2) de una jugada recomendada.
-	 * @return Array con posiciones (2) en matriz de jugada recomendada. Devuelve null en caso no de existir posición recomendada.
+	 * Obtiene una recomendación de manera random entre todas las disponibles.
+	 * @return Recomendación de jugada. Devuelve null si no hay recomendaciones disponibles.
 	 */
 	public Recomendacion obtenerRecomendacion() {
 		ArrayList<Recomendacion> recomendaciones = obtenerRecomendacionesPosibles();
@@ -391,6 +391,10 @@ public class Juego {
 		}
 	}
 
+	/**
+	 * Obtiene una lista de todas las recomendaciones posibles en el tablero.
+	 * @return Lista de recomendaciones posibles.
+	 */
 	public ArrayList<Recomendacion> obtenerRecomendacionesPosibles() {
 		int size = this.matriz.length;
 		ArrayList<Recomendacion> recomendaciones = new ArrayList<>();
@@ -448,6 +452,11 @@ public class Juego {
 		return recomendaciones;
 	}
 
+	/**
+	 * Devuelve una recomendación random a partir de una lista.
+	 * @param Recomendaciones.
+	 * @return Recomendación.
+	 */
 	private Recomendacion obtenerRecomendacionRandom (ArrayList<Recomendacion> recomendaciones) {
 		Random generator = new Random();
         int randomIndex = generator.nextInt(recomendaciones.size());
