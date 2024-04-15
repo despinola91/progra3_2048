@@ -24,11 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.AudioInputStream;
 
-import java.io.File;
 
 
 public class PantallaJuego extends JFrame implements KeyListener {
@@ -326,7 +322,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	}
 	
 	
-	//SONIDO
+	//Sonido - llama al metodo reproducirSonido de la clase Sonido
 	private void reproducirSonido(String rutaArchivo) {
 	    Sonido.reproducirSonido(rutaArchivo);
 	}
