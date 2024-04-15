@@ -265,11 +265,13 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	// Verifica si el juego esta ganado o perdido
 	public void verificarEstadoJuego() {
 		if (juego.juegoGanado()) {
+			reproducirSonido("gameWin.wav");
 			JOptionPane.showMessageDialog(this, "JUEGO GANADO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
 			juego.limpiarMatriz();
 			mostrarPantallaInicial();
 
 		} else if (juego.juegoPerdido()) {
+			reproducirSonido("gameOver.wav");
 			JOptionPane.showMessageDialog(this, "JUEGO PERDIDO!", "Fin del Juego", JOptionPane.INFORMATION_MESSAGE);
 			juego.limpiarMatriz();
 			mostrarPantallaInicial();
