@@ -196,6 +196,8 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	        int columna2 = recomendacion.obtenerSegundaCelda().getPosicion().obtenerColumna();
 
 	        lblJugadaRecomendada.setVisible(true);
+	        
+	        reproducirSonido("jugadaRecomendada.wav");
 
 	        botones[fila1][columna1].setBackground(Color.YELLOW);
 	        botones[fila2][columna2].setBackground(Color.YELLOW);
@@ -304,6 +306,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	            break;
 	    }
 	    reproducirSonido("movimiento.wav");
+	    
 	    limpiarTextoJugadaRecomendada();
 	    actualizarTablero();
 	    verificarEstadoJuego();
@@ -314,6 +317,12 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// ...
 	}
+	
+	
+	//
+//	if juego.huboCombinacion(){
+//		reproducirSonido(suma);
+//	}
 	
 	//SONIDO
 	private void reproducirSonido(String rutaArchivo) {
