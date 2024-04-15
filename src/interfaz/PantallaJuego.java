@@ -205,8 +205,6 @@ public class PantallaJuego extends JFrame implements KeyListener {
 
 	        botones[fila1][columna1].setBackground(Color.YELLOW);
 	        botones[fila2][columna2].setBackground(Color.YELLOW);
-	    } else {
-	    	limpiarTextoJugadaRecomendada();
 	    }
 	}
 	/*Se lo saca afuera al metodo ya que las coordenadas tardaban 10 segundos en limpiarse de la pantalla
