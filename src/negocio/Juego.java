@@ -6,10 +6,12 @@ public class Juego {
 	
 	private int [][] matriz = new int[4][4];
 	private int puntaje;
+	private boolean huboCombinacion;
 	
 	public Juego() {
 		this.iniciarMatriz();
 		this.puntaje = 0;
+		this.huboCombinacion = false;
 	};
 	
 
@@ -106,6 +108,7 @@ public class Juego {
 	 */
 	public boolean moverElementosArriba() {
 		boolean seMovio = false; //Registra si se realizó algún movimiento
+		this.huboCombinacion = false;
 
 	    for (int columna = 0; columna < this.matriz.length; columna++) {
 	        int indiceUltimaFichaCombinada = -1; //Para que no se sume la misma ficha varias veces en una misma columna
@@ -124,6 +127,7 @@ public class Juego {
 	                    this.matriz[filaActual][columna] = 0;
 	                    indiceUltimaFichaCombinada = filaActual - 1;
 	                    seMovio = true;
+						this.huboCombinacion = true;
 	                }
 	            }
 	        }
@@ -149,6 +153,7 @@ public class Juego {
 	 */
 	public boolean moverElementosAbajo() {
 		boolean seMovio = false; //Registra si se realizó algún movimiento
+		this.huboCombinacion = false;
 		int size = this.matriz.length;
 
 	    for (int columna = 0; columna < this.matriz.length; columna++) {
@@ -168,6 +173,7 @@ public class Juego {
 	                    this.matriz[filaActual][columna] = 0;
 	                    indiceUltimaFichaCombinada = filaActual + 1;
 	                    seMovio = true;
+						this.huboCombinacion = true;
 	                }
 	            }
 	        }
@@ -194,6 +200,7 @@ public class Juego {
 	 */
 	public boolean moverElementosIzquierda() {
 		boolean seMovio = false; //Registra si se realizó algún movimiento
+		this.huboCombinacion = false;
 
 	    for (int fila = 0; fila < this.matriz.length; fila++) {
 	        int indiceUltimaFichaCombinada = -1; //Para que no se sume la misma ficha varias veces en una misma fila
@@ -212,6 +219,7 @@ public class Juego {
 	                    this.matriz[fila][columnaActual] = 0;
 	                    indiceUltimaFichaCombinada = columnaActual - 1;
 	                    seMovio = true;
+						this.huboCombinacion = true;
 	                }
 	            }
 	        }
@@ -238,6 +246,7 @@ public class Juego {
 	 */	
 	public boolean moverElementosDerecha() {
 		boolean seMovio = false; //Registra si se realizó algún movimiento
+		this.huboCombinacion = false;
 		int size = this.matriz.length;
 
 	    for (int fila = 0; fila < this.matriz.length; fila++) {
@@ -257,6 +266,7 @@ public class Juego {
 	                    this.matriz[fila][columnaActual] = 0;
 	                    indiceUltimaFichaCombinada = columnaActual + 1;
 	                    seMovio = true;
+						this.huboCombinacion = true;
 	                }
 	            }
 	        }
@@ -471,5 +481,13 @@ public class Juego {
 		Random generator = new Random();
         int randomIndex = generator.nextInt(recomendaciones.size());
         return recomendaciones.get(randomIndex);
+	}
+
+	/**
+	 * Indica si hubo una combinacion de celdas desde el ultimo movimiento.
+	 * @return Booleano indicando si hubo combinacion o no.
+	 */
+	public boolean huboCombinacion() {
+		return this.huboCombinacion;
 	}
 }
