@@ -421,6 +421,10 @@ public class Juego {
 						recomendaciones.add(recomendacion);
 
 						recomendacion = new Recomendacion();
+						recomendacion.definirPrimeraCelda(new Celda(matriz[fila][columna], fila, columna));
+					}
+					else {
+						recomendacion.definirPrimeraCelda(new Celda(matriz[fila][columna], fila, columna));
 					}
 				}
 			}
@@ -446,6 +450,10 @@ public class Juego {
 						recomendaciones.add(recomendacion);
 
 						recomendacion = new Recomendacion();
+						recomendacion.definirPrimeraCelda(new Celda(matriz[fila][columna], fila, columna));
+					}
+					else {
+						recomendacion.definirPrimeraCelda(new Celda(matriz[fila][columna], fila, columna));
 					}
 				}
 			}

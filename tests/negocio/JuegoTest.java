@@ -212,6 +212,18 @@ class JuegoTest {
         });
 
         assertEquals(4, juego.obtenerRecomendacionesPosibles().size());
+
+        //Caso con celdas distanciadas con obstáculo
+        juego.definirMatriz(new int[][] {
+            {2, 0, 0, 0},
+            {8, 4, 0, 8},
+            {2, 8, 0, 0},
+            {0, 4, 16, 4}
+        });
+
+        recomendacion = juego.obtenerRecomendacion();
+
+        assertTrue(recomendacion == null);
     }
 
     @Test
