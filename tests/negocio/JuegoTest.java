@@ -224,6 +224,22 @@ class JuegoTest {
         recomendacion = juego.obtenerRecomendacion();
 
         assertTrue(recomendacion == null);
+
+        //Caso con celdas distanciadas con obstáculo
+        juego.definirMatriz(new int[][] {
+            {0, 0, 0, 0},
+            {8, 2, 0, 0},
+            {16, 4, 0, 4},
+            {2, 8, 4, 2}
+        });
+
+        recomendacion = juego.obtenerRecomendacion();
+
+        celdaEsperada1 = new Celda(4, 2, 1);
+        celdaEsperada2 = new Celda(4, 2, 3);
+
+        assertThat(recomendacion.obtenerPrimeraCelda(), samePropertyValuesAs(celdaEsperada1));
+        assertThat(recomendacion.obtenerSegundaCelda(), samePropertyValuesAs(celdaEsperada2));
     }
 
     @Test
@@ -287,6 +303,30 @@ class JuegoTest {
 
         assertTrue(juego.juegoPerdido() == false);
         
+    }
+
+    @Test
+    void huboCombinacion() {
+        
+        juego.definirMatriz( new int[][] {
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8}
+    	});
+    	
+    	juego.moverElementosDerecha();
+        assertTrue(!juego.huboCombinacion());
+
+        juego.definirMatriz( new int[][] {
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,0,8},
+    		{2,4,4,8}
+    	});
+    	
+    	juego.moverElementosDerecha();
+        assertTrue(juego.huboCombinacion());
     }
 }
     
