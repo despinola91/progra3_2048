@@ -25,8 +25,6 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 
 
-
-
 public class PantallaJuego extends JFrame implements KeyListener {
 
 	/**
