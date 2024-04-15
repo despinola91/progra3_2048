@@ -377,34 +377,89 @@ public class Juego {
 	}
 	
 	/**
-	 * Obtiene las posiciones de una jugada recomendada. Puede no existir una jugada recomendada hasta aparecer un nuevo numero.
-	 * @return Array con posiciones en matriz de jugada recomendada. Puede ser NULL
+	 * Obtiene una recomendación de manera random entre todas las disponibles.
+	 * @return Recomendación de jugada. Devuelve null si no hay recomendaciones disponibles.
 	 */
-	public Posicion[] obtenerPosicionesJugadaRecomendada() {
-		int size = this.matriz.length;
+	public Recomendacion obtenerRecomendacion() {
+		ArrayList<Recomendacion> recomendaciones = obtenerRecomendacionesPosibles();
 		
+		if (recomendaciones.size() == 0) {
+			return null;
+		}
+		else {
+			return obtenerRecomendacionRandom(obtenerRecomendacionesPosibles());
+		}
+	}
+
+	/**
+	 * Obtiene una lista de todas las recomendaciones posibles en el tablero.
+	 * @return Lista de recomendaciones posibles.
+	 */
+	public ArrayList<Recomendacion> obtenerRecomendacionesPosibles() {
+		int size = this.matriz.length;
+		ArrayList<Recomendacion> recomendaciones = new ArrayList<>();
+
+		//Recorremos cada fila buscando recomendaciones
 		for (int fila = 0; fila < size; fila++) {
+
+			Recomendacion recomendacion = new Recomendacion();
 			for(int columna = 0; columna < size; columna++) {
-				Celda CeldaArriba = (fila - 1)  < 0 ? null : new Celda(this.matriz[fila-1][columna], fila-1, columna);
-				Celda CeldaAbajo = (fila + 1)  > this.matriz.length-1 ? null : new Celda(this.matriz[fila+1][columna], fila+1, columna);
-				Celda CeldaIzquierda = (columna - 1 < 0) ? null : new Celda(this.matriz[fila][columna-1], fila, columna-1);
-				Celda CeldaDerecha = (columna + 1) > this.matriz.length-1 ? null : new Celda(this.matriz[fila][columna+1], fila, columna+1);
-				
-				Celda[] CeldasProximas = {CeldaArriba, CeldaAbajo, CeldaIzquierda, CeldaDerecha};
-				
-				for(Celda celda : CeldasProximas) {
-					if(celda != null) {
-						int valorCelda = celda.getValor();
-						
-						if(valorCelda == this.matriz[fila][columna] && valorCelda != 0) {
-							Posicion[] arrayPosicionesJugadaRecomendada = new Posicion[] {new Posicion(fila, columna), celda.getPosicion()};
-							return arrayPosicionesJugadaRecomendada;
-						}
+
+				//Si es 0 pasamos a la siguiente columna
+				if (matriz[fila][columna] == 0) {
+					continue;
+				}
+
+				if (recomendacion.obtenerPrimeraCelda() == null) {
+					recomendacion.definirPrimeraCelda(new Celda(matriz[fila][columna], fila, columna));
+				}
+				else {
+					if (recomendacion.obtenerPrimeraCelda().getValor() == matriz[fila][columna]) {
+						recomendacion.definirSegundaCelda(new Celda(matriz[fila][columna], fila, columna));
+						recomendaciones.add(recomendacion);
+
+						recomendacion = new Recomendacion();
 					}
 				}
 			}
 		}
-		
-		return null;
+
+		//Recorremos cada columna buscando recomendaciones
+		for(int columna = 0; columna < size; columna++) {
+
+			Recomendacion recomendacion = new Recomendacion();
+			for (int fila = 0; fila < size; fila++) {
+
+				//Si es 0 pasamos a la siguiente fila
+				if (matriz[fila][columna] == 0) {
+					continue;
+				}
+
+				if (recomendacion.obtenerPrimeraCelda() == null) {
+					recomendacion.definirPrimeraCelda(new Celda(matriz[fila][columna], fila, columna));
+				}
+				else {
+					if (recomendacion.obtenerPrimeraCelda().getValor() == matriz[fila][columna]) {
+						recomendacion.definirSegundaCelda(new Celda(matriz[fila][columna], fila, columna));
+						recomendaciones.add(recomendacion);
+
+						recomendacion = new Recomendacion();
+					}
+				}
+			}
+		}
+
+		return recomendaciones;
+	}
+
+	/**
+	 * Devuelve una recomendación random a partir de una lista.
+	 * @param Recomendaciones.
+	 * @return Recomendación.
+	 */
+	private Recomendacion obtenerRecomendacionRandom (ArrayList<Recomendacion> recomendaciones) {
+		Random generator = new Random();
+        int randomIndex = generator.nextInt(recomendaciones.size());
+        return recomendaciones.get(randomIndex);
 	}
 }

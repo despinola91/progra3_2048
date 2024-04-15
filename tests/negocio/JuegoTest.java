@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -155,41 +156,62 @@ class JuegoTest {
     }
     
     @Test
-    void obtenerPosicionesJugadaRecomendada() {
+    void obtenerRecomendacion() {
+
+        //Caso con celdas contiguas
         juego.definirMatriz(new int[][] {
             {0, 0, 0, 0},
             {0, 4, 0, 8},
-            {2, 4, 0, 8},
-            {2, 4, 0, 8}
+            {2, 4, 0, 0},
+            {0, 0, 0, 0}
         });
 
-        Posicion[] posicionesJugadaRecomendada = juego.obtenerPosicionesJugadaRecomendada();
-        Posicion posicionJugadaRecomendadaEsperada = new Posicion(1, 1);
+        Recomendacion recomendacion = juego.obtenerRecomendacion();
 
-        // Verifico si la posicion buscada está dentro del array 
-        boolean posicionEncontrada = false;
-        for (Posicion posicionJugada : posicionesJugadaRecomendada) {
-            if (posicionJugada.equals(posicionJugadaRecomendadaEsperada)) {
-                posicionEncontrada = true;
-            }
-        }
-        
-        // Caso Null
+        Celda celdaEsperada1 = new Celda(4, 1, 1);
+        Celda celdaEsperada2 = new Celda(4, 2, 1);
+     
+        assertThat(recomendacion.obtenerPrimeraCelda(), samePropertyValuesAs(celdaEsperada1));
+        assertThat(recomendacion.obtenerSegundaCelda(), samePropertyValuesAs(celdaEsperada2));
+
+
+        // Caso sin recomendaciones
         juego.definirMatriz(new int[][] {
             {0, 0, 0, 0},
             {0, 0, 0, 8},
             {0, 4, 0, 0},
-            {2, 0, 0, 8}
+            {2, 0, 0, 0}
         });
 
-        posicionesJugadaRecomendada = juego.obtenerPosicionesJugadaRecomendada();
+        recomendacion = juego.obtenerRecomendacion();
+        assertTrue(recomendacion == null);
 
-        // Verifico si la posicion buscada está dentro del array 
-        boolean posicionNoEncontrada = posicionesJugadaRecomendada == null;
-        
-        
-        assertTrue(posicionEncontrada, "La posición esperada no está en las posiciones recomendadas");
-        assertTrue(posicionNoEncontrada, "No deberían existir jugadas recomendadas");
+
+        //Caso con celdas distanciadas
+        juego.definirMatriz(new int[][] {
+            {0, 0, 0, 0},
+            {0, 4, 0, 8},
+            {2, 0, 0, 0},
+            {0, 4, 0, 0}
+        });
+
+        recomendacion = juego.obtenerRecomendacion();
+
+        celdaEsperada1 = new Celda(4, 1, 1);
+        celdaEsperada2 = new Celda(4, 3, 1);
+
+        assertThat(recomendacion.obtenerPrimeraCelda(), samePropertyValuesAs(celdaEsperada1));
+        assertThat(recomendacion.obtenerSegundaCelda(), samePropertyValuesAs(celdaEsperada2));
+
+        //Verificando cantidad de recomendaciones
+        juego.definirMatriz(new int[][] {
+            {16, 0, 16, 0},
+            {0, 4, 0, 8},
+            {2, 4, 2, 8},
+            {0, 4, 0, 0}
+        });
+
+        assertEquals(4, juego.obtenerRecomendacionesPosibles().size());
     }
 
     @Test
