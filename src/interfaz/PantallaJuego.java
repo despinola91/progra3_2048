@@ -150,7 +150,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		lblJugadaRecomendada.setVisible(false);
 		lblJugadaRecomendada.setForeground(Color.YELLOW);
 		lblJugadaRecomendada.setFont(new Font("Segoe UI", Font.BOLD, 17));
-		lblJugadaRecomendada.setBounds(141, 448, 167, 14);
+		lblJugadaRecomendada.setBounds(190, 448, 216, 14);
 		getContentPane().add(lblJugadaRecomendada);
 
 		// Fondo
