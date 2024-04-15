@@ -183,6 +183,11 @@ public class PantallaJuego extends JFrame implements KeyListener {
 			}
 		}
 		actualizarPuntaje();
+		
+		//Sonido si hubo combinacion de celdas
+		if ( juego.huboCombinacion() ){
+			reproducirSonido("combinacion.wav");
+		}
 	}
 	
 	// Actualiza las posiciones recomendadas y resalta las celdas en tablero
@@ -318,11 +323,6 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		// ...
 	}
 	
-	
-	//
-//	if juego.huboCombinacion(){
-//		reproducirSonido(suma);
-//	}
 	
 	//SONIDO
 	private void reproducirSonido(String rutaArchivo) {
