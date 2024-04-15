@@ -2,6 +2,7 @@ package interfaz;
 
 import negocio.Juego;
 import negocio.Posicion;
+import negocio.Recomendacion;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -223,15 +224,17 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	
 	// Actualiza las posiciones recomendadas y resalta las celdas en tablero
 	private void actualizarPosicionesRecomendadas() {
-	    Posicion[] posiciones = juego.obtenerPosicionesJugadaRecomendada();
-	    if (posiciones != null && posiciones.length == 2) {
-	        lblCoordenada1.setText("(" + posiciones[0].obtenerFila() + "," + posiciones[0].obtenerColumna() + ")");
-	        lblCoordenada2.setText("(" + posiciones[1].obtenerFila() + "," + posiciones[1].obtenerColumna() + ")");
+	    
+		Recomendacion recomendacion = juego.obtenerRecomendacion();
+	    if (recomendacion != null) {
+	        int fila1 = recomendacion.obtenerPrimeraCelda().getPosicion().obtenerFila();
+	        int columna1 = recomendacion.obtenerPrimeraCelda().getPosicion().obtenerColumna();
+	        int fila2 = recomendacion.obtenerSegundaCelda().getPosicion().obtenerFila();
+	        int columna2 = recomendacion.obtenerSegundaCelda().getPosicion().obtenerColumna();
 
-	        int fila1 = posiciones[0].obtenerFila();
-	        int columna1 = posiciones[0].obtenerColumna();
-	        int fila2 = posiciones[1].obtenerFila();
-	        int columna2 = posiciones[1].obtenerColumna();
+	        lblCoordenada1.setText("(" + fila1 + "," + columna1 + ")");
+	        lblCoordenada2.setText("(" + fila2 + "," + columna2 + ")");
+
 	        botones[fila1][columna1].setBackground(Color.YELLOW);
 	        botones[fila2][columna2].setBackground(Color.YELLOW);
 	    } else {
