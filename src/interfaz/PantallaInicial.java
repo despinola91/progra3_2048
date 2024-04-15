@@ -43,7 +43,6 @@ public class PantallaInicial {
 	 */
 	public PantallaInicial() {
 		initialize();
-
 	}
 
 	/**
@@ -51,6 +50,7 @@ public class PantallaInicial {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setTitle("2048"); // Titulo de la ventana
 		// frame.setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaInicial.class.getResource("/game_2048/2048icon.png")));
 		// //Icono

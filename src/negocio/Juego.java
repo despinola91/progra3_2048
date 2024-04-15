@@ -286,11 +286,13 @@ public class Juego {
 	 * @return void
 	 */
 	private void agregarNuevaFicha() {
-		Posicion posicionDisponible = this.obtenerPosicionRandomDisponible();
-		int filaDisponible = posicionDisponible.obtenerFila();
-		int columnaDisponible = posicionDisponible.obtenerColumna();
-		
-		this.matriz[filaDisponible][columnaDisponible] = obtenerValorRandom();
+		if (!juegoGanado()) {
+			Posicion posicionDisponible = this.obtenerPosicionRandomDisponible();
+			int filaDisponible = posicionDisponible.obtenerFila();
+			int columnaDisponible = posicionDisponible.obtenerColumna();
+
+			this.matriz[filaDisponible][columnaDisponible] = obtenerValorRandom();
+		}
 	}
 	
 	/**

@@ -1,12 +1,19 @@
 package interfaz;
 
 import negocio.Juego;
+import negocio.Posicion;
+import negocio.Recomendacion;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +31,12 @@ import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
 import javax.swing.JTextField;
 
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.UIManager;
+
+
 public class PantallaJuego extends JFrame implements KeyListener {
 
 	/**
@@ -34,6 +47,15 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	private JButton[][] botones;
 	private JPanel panelTablero;
 	private JTextField textPuntajeActual;
+	
+	private JLabel lblPosicion1;
+	private JLabel lblPosicion2;
+	private JLabel lblCoordenada1;
+	private JLabel lblCoordenada2;
+	private JLabel lblJugadaRecomendada;
+	
+	private Timer timer;
+    private static final int DELAY = 7000; //aprox 10seg
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,6 +72,27 @@ public class PantallaJuego extends JFrame implements KeyListener {
 
 	public PantallaJuego() {
 		initialize();
+		setResizable(false); // Para que no se redimencione el alto y ancho
+
+		//Se agrega panel protector para que los eventos de click no intervengan en el enfoque
+		JPanel glassPane = (JPanel) this.getGlassPane();
+		glassPane.setVisible(true); 
+		glassPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Si se hace click no hace nada
+			}
+		});
+		
+	    // Crea el temporizador
+	    timer = new Timer(DELAY, new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            // Actualiza las posiciones recomendadas
+	            actualizarPosicionesRecomendadas();
+	        }
+	    });
+	    timer.start(); // Inicia el temporizador
 	}
 
 	private void initialize() {
@@ -68,6 +111,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		panelTablero.setBounds(88, 82, 414, 337);
 		getContentPane().add(panelTablero);
 		panelTablero.setLayout(new GridLayout(4, 4));
+		
 
 		// Crea y posiciona los botones del tablero 4x4
 		botones = new JButton[4][4];
@@ -75,7 +119,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 			for (int columna = 0; columna < 4; columna++) {
 				botones[fila][columna] = new JButton();
 				botones[fila][columna].setBackground(new Color(210, 180, 140));
-				botones[fila][columna].setFont(new Font("Segoe UI Black", Font.PLAIN, 29));
+				botones[fila][columna].setFont(new Font("Segoe UI Black", Font.PLAIN, 24));
 				panelTablero.add(botones[fila][columna]);
 			}
 		}
@@ -96,6 +140,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		getContentPane().add(lblPuntaje);
 
 		textPuntajeActual = new JTextField();
+		textPuntajeActual.setEditable(false);
 		textPuntajeActual.setHorizontalAlignment(SwingConstants.CENTER);
 		textPuntajeActual.setBackground(new Color(255, 248, 220));
 		textPuntajeActual.setForeground(new Color(153, 50, 204));
@@ -103,16 +148,54 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		textPuntajeActual.setBounds(409, 33, 114, 32);
 		getContentPane().add(textPuntajeActual);
 		textPuntajeActual.setColumns(10);
+		
+		//Jugada recomendada
+		lblJugadaRecomendada = new JLabel("Jugada Recomendada: ");
+		lblJugadaRecomendada.setForeground(Color.CYAN);
+		lblJugadaRecomendada.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblJugadaRecomendada.setBounds(141, 448, 167, 14);
+		getContentPane().add(lblJugadaRecomendada);
+		
+		lblPosicion1 = new JLabel("Posicion 1 = ");
+		lblPosicion1.setForeground(Color.CYAN);
+		lblPosicion1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblPosicion1.setBounds(340, 430, 100, 20);
+		getContentPane().add(lblPosicion1);
+
+		lblCoordenada1 = new JLabel();
+		lblCoordenada1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblCoordenada1.setForeground(Color.CYAN);
+		lblCoordenada1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCoordenada1.setBackground(SystemColor.menu);
+		lblCoordenada1.setBounds(418, 430, 50, 18);
+		getContentPane().add(lblCoordenada1);
+
+		lblPosicion2 = new JLabel("Posicion 2 = ");
+		lblPosicion2.setForeground(Color.CYAN);
+		lblPosicion2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblPosicion2.setBounds(340, 458, 100, 20);
+		getContentPane().add(lblPosicion2);
+
+		lblCoordenada2 = new JLabel();
+		lblCoordenada2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		lblCoordenada2.setForeground(Color.CYAN);
+		lblCoordenada2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCoordenada2.setBackground(SystemColor.menu);
+		lblCoordenada2.setBounds(418, 460, 50, 18);
+		getContentPane().add(lblCoordenada2);
 
 		// Fondo
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon("figura3.png"));
 		lblFondo.setBounds(0, 0, 588, 493);
 		getContentPane().add(lblFondo);
+		
 
 		addKeyListener(this); // escucha eventos de teclado
 		setFocusable(true); // recibe los eventos, la ventana es el foco
 		setFocusTraversalKeysEnabled(false); // desactiva teclas que me puedan cambiar que el foco de la ventana
+		
+
 
 		actualizarTablero();
 
@@ -127,7 +210,6 @@ public class PantallaJuego extends JFrame implements KeyListener {
 				int valor = matriz[fila][columna];
 				botones[fila][columna].setText(valor == 0 ? "" : String.valueOf(valor)); // muestra el nro unicamente si
 																							// es distinto de 0
-
 				// Cambiar el color según el valor usando el metodo cambiaColorCelda
 				botones[fila][columna].setBackground(cambiaColorCelda(valor));
 
@@ -138,6 +220,33 @@ public class PantallaJuego extends JFrame implements KeyListener {
 			}
 		}
 		actualizarPuntaje();
+	}
+	
+	// Actualiza las posiciones recomendadas y resalta las celdas en tablero
+	private void actualizarPosicionesRecomendadas() {
+	    
+		Recomendacion recomendacion = juego.obtenerRecomendacion();
+	    if (recomendacion != null) {
+	        int fila1 = recomendacion.obtenerPrimeraCelda().getPosicion().obtenerFila();
+	        int columna1 = recomendacion.obtenerPrimeraCelda().getPosicion().obtenerColumna();
+	        int fila2 = recomendacion.obtenerSegundaCelda().getPosicion().obtenerFila();
+	        int columna2 = recomendacion.obtenerSegundaCelda().getPosicion().obtenerColumna();
+
+	        lblCoordenada1.setText("(" + fila1 + "," + columna1 + ")");
+	        lblCoordenada2.setText("(" + fila2 + "," + columna2 + ")");
+
+	        botones[fila1][columna1].setBackground(Color.YELLOW);
+	        botones[fila2][columna2].setBackground(Color.YELLOW);
+	    } else {
+	    	limpiarCoordenadas();
+	    }
+	}
+	/*Se lo saca afuera al metodo ya que las coordenadas tardaban 10 segundos en limpiarse de la pantalla
+	 habiendo movido alguna tecla incluso. Asique se llama a este metodo despues de haber movido una tecla
+	 */
+	private void limpiarCoordenadas() {
+	    lblCoordenada1.setText("");
+	    lblCoordenada2.setText("");
 	}
 
 	// cambia de color el fondo de la celda segùn el valor resultado de la suma
@@ -206,6 +315,7 @@ public class PantallaJuego extends JFrame implements KeyListener {
 		pantallaInicial.getFrame().setVisible(true); // Hace visible la ventana PantallaInicial
 		this.dispose(); // Cerrar la ventana actual
 	}
+	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -215,23 +325,29 @@ public class PantallaJuego extends JFrame implements KeyListener {
 	// Nexo entre logica e interfaz
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		switch (keyCode) {
-			case KeyEvent.VK_UP:
-				juego.moverArriba();
-				break;
-			case KeyEvent.VK_DOWN:
-				juego.moverAbajo();
-				break;
-			case KeyEvent.VK_LEFT:
-				juego.moverIzquierda();
-				break;
-			case KeyEvent.VK_RIGHT:
-				juego.moverDerecha();
-				break;
-		}
-		actualizarTablero();
-		verificarEstadoJuego();
+	    // Reinicia el temporizador en cada movimiento
+		timer.restart();
+
+	    // Captura eventos de teclas
+	    int keyCode = e.getKeyCode();
+	    switch (keyCode) {
+	        case KeyEvent.VK_UP:
+	            juego.moverArriba();
+	            break;
+	        case KeyEvent.VK_DOWN:
+	            juego.moverAbajo();
+	            break;
+	        case KeyEvent.VK_LEFT:
+	            juego.moverIzquierda();
+	            break;
+	        case KeyEvent.VK_RIGHT:
+	            juego.moverDerecha();
+	            break;
+	    }
+	    limpiarCoordenadas(); // Limpia las coordenadas después de mover la tecla
+	    actualizarTablero();
+	    verificarEstadoJuego();
+	    
 	}
 
 	@Override
